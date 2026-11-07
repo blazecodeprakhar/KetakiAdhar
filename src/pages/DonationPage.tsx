@@ -66,9 +66,10 @@ const DonationPage = () => {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
+    const sanitized = name === 'phone' ? value.replace(/\D/g, '').slice(0, 10) : value;
     setFormData(prev => ({
       ...prev,
-      [name]: value
+      [name]: sanitized
     }));
   };
 
