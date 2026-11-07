@@ -1,7 +1,9 @@
 import React from 'react';
 import { ChevronDown } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 const HeroSection = () => {
+  const { t } = useLanguage();
   const scrollToNext = () => {
     const element = document.getElementById('statistics');
     element?.scrollIntoView({ behavior: 'smooth' });
@@ -39,13 +41,13 @@ const HeroSection = () => {
       {/* Content */}
       <div className="relative z-20 text-center px-4 lg:px-8 max-w-4xl mx-auto">
         <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-8 animate-slide-up">
-          <span className="block">How does</span>
+          <span className="block">{t.hero.line1}</span>
           <span className="block bg-gradient-to-r from-accent-400 to-primary-400 bg-clip-text text-transparent">
-            Ketaki Adhar
+            {t.hero.brand}
           </span>
-          <span className="block">Helps Farmers</span>
+          <span className="block">{t.hero.line2}</span>
           <span className="block bg-gradient-to-r from-accent-400 to-primary-400 bg-clip-text text-transparent">
-            Grow and Thrive
+            {t.hero.line3}
           </span>
         </h1>
         
@@ -54,7 +56,7 @@ const HeroSection = () => {
             onClick={scrollToNext}
             className="inline-flex items-center space-x-2 text-white/90 hover:text-white transition-colors group"
           >
-            <span className="text-lg font-medium">Scroll to Learn More</span>
+            <span className="text-lg font-medium">{t.hero.scroll}</span>
             <ChevronDown className="w-6 h-6 group-hover:translate-y-1 transition-transform" />
           </button>
         </div>
