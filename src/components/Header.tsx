@@ -1,10 +1,13 @@
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useLanguage } from '../context/LanguageContext';
+import LanguageSelector from './LanguageSelector';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { t } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,26 +20,25 @@ const Header = () => {
   }, []);
 
   const navItems = [
-    { label: 'Our Story', href: '/our-story' },
-    { label: 'Career', href: '/careers' },
-    { label: 'Why Farmers Matter', href: '#why-farmers' },
-    { label: 'Our Initiatives', href: '#initiatives' },
-    { label: 'Be a Volunteer', href: '#volunteer' },
-    { label: 'FAQ', href: '/faq' },
-    { label: 'Contact Us', href: '/contact' },
+    { label: t.nav.story, href: '/our-story' },
+    { label: t.nav.careers, href: '/careers' },
+    { label: t.nav.whyFarmers, href: '/#why-farmers' },
+    { label: t.nav.initiatives, href: '/#initiatives' },
+    { label: t.nav.volunteer, href: '/volunteer' },
+    { label: t.nav.faq, href: '/faq' },
+    { label: t.nav.contact, href: '/contact' },
   ];
 
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      isScrolled || isMobileMenuOpen ? 'bg-white/95 backdrop-blur-sm shadow-lg' : 'bg-transparent'
+      isScrolled || isMobileMenuOpen 
+        ? 'bg-white/95 backdrop-blur-md shadow-lg border-b border-gray-100' 
+        : 'bg-gradient-to-b from-black/85 via-black/40 to-transparent'
     }`}>
       <div className="container mx-auto px-4 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <div className="flex items-center space-x-2">
-            {/* <div className="w-10 h-10 bg-primary-500 rounded-full flex items-center justify-center">
-             
-            </div> */}
             <Link 
               to="/" 
               className={`text-xl font-bold transition-colors ${
@@ -48,40 +50,41 @@ const Header = () => {
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
+          <nav className="hidden md:flex items-center space-x-6 lg:space-x-8">
             {navItems.map((item) => (
-              item.href.startsWith('#') ? (
-                <a
-                  key={item.label}
-                  href={item.href}
-                  className={`text-sm font-medium transition-colors ${
-                    isScrolled ? 'text-gray-700 hover:text-primary-600' : 'text-white/90 hover:text-white'
-                  }`}
-                >
-                  {item.label}
-                </a>
-              ) : (
-                <Link
-                  key={item.label}
-                  to={item.href}
-                  className={`text-sm font-medium transition-colors ${
-                    isScrolled ? 'text-gray-700 hover:text-primary-600' : 'text-white/90 hover:text-white'
-                  }`}
-                >
-                  {item.label}
-                </Link>
-              )
+              <Link
+                key={item.href}
+                to={item.href}
+                className={`text-sm font-medium transition-colors ${
+                  isScrolled ? 'text-gray-700 hover:text-primary-600' : 'text-white/90 hover:text-white'
+                }`}
+              >
+                {item.label}
+              </Link>
             ))}
-            <button className="bg-primary-500 text-white px-6 py-2 rounded-full font-medium hover:bg-primary-600 transition-colors">
-              Support Now
-            </button>
+
+            {/* Desktop Language Selector */}
+            <LanguageSelector isScrolled={isScrolled} variant="desktop" />
+
+            {/* Donate CTA */}
+            <Link 
+              to="/donate"
+              className="bg-primary-500 text-white px-5 py-2 rounded-full font-medium hover:bg-primary-600 transition-colors shadow-sm"
+            >
+              {t.nav.donateNow}
+            </Link>
           </nav>
 
-          {/* Mobile menu button */}
-          <div className="md:hidden">
+          {/* Mobile Right Controls: Language Selector + Menu Toggle */}
+          <div className="flex items-center space-x-2 md:hidden">
+            {/* Quick mobile language pill */}
+            <LanguageSelector isScrolled={isScrolled} variant="mobile-header" />
+
+            {/* Mobile menu toggle */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className={`focus:outline-none transition-colors ${
+              aria-label="Toggle Navigation Menu"
+              className={`p-1.5 rounded-lg focus:outline-none transition-colors ${
                 isScrolled || isMobileMenuOpen ? 'text-gray-700 hover:text-primary-500' : 'text-white hover:text-white'
               }`}
             >
@@ -94,38 +97,34 @@ const Header = () => {
           </div>
         </div>
 
-        {/* Mobile menu */}
+        {/* Mobile menu drawer */}
         <div
           className={`md:hidden transition-all duration-300 ease-in-out ${
-            isMobileMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0 overflow-hidden'
+            isMobileMenuOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0 overflow-hidden pointer-events-none'
           }`}
         >
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            {navItems.map((item) =>
-              item.href.startsWith('#') ? (
-                <a
-                  key={item.label}
-                  href={item.href}
-                  className="block px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 rounded-md"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  {item.label}
-                </a>
-              ) : (
-                <Link
-                  key={item.label}
-                  to={item.href}
-                  className="block px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 rounded-md"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  {item.label}
-                </Link>
-              )
-            )}
+          {/* Prominent Easy-to-switch Language Grid for Phone Users */}
+          <LanguageSelector variant="mobile-menu" />
+
+          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 border-t border-gray-100">
+            {navItems.map((item) => (
+              <Link
+                key={item.href}
+                to={item.href}
+                className="block px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 rounded-md"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                {item.label}
+              </Link>
+            ))}
           </div>
-          <div className="px-4 py-4">
-            <Link to="/donate" className="block w-full text-center bg-primary-500 text-white px-6 py-2 rounded-full font-medium hover:bg-primary-600 transition-colors">
-              Support Now
+          <div className="px-4 pb-4">
+            <Link 
+              to="/donate" 
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="block w-full text-center bg-primary-500 text-white px-6 py-2.5 rounded-full font-medium hover:bg-primary-600 transition-colors"
+            >
+              {t.nav.donateNow}
             </Link>
           </div>
         </div>
