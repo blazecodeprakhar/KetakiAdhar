@@ -7,7 +7,10 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "verify:i18n": "node scripts/verify-translations.mjs",
+    "verify:content": "node scripts/verify-content.mjs",
+    "verify": "npm run verify:i18n && npm run verify:content"
   },
   "dependencies": {
     "framer-motion": "^12.19.1",
