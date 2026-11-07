@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { useLanguage } from '../context/LanguageContext';
 
 
 
@@ -17,6 +18,8 @@ const SvgMask = () => (
 );
 
 const MapSection = () => {
+  const { t } = useLanguage();
+  const m = t.mapSection;
   const targetRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: targetRef,
@@ -51,8 +54,10 @@ const MapSection = () => {
             className="absolute inset-0 flex flex-col items-center justify-center pt-4 gap-8"
             style={{ opacity: initialLayoutOpacity }}
           >
-            <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold text-gray-900 text-center px-4">
-              How many states did <span className="text-emerald-600">Ketaki Adhar's</span> mission of farmer empowerment reach?
+            <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold text-gray-900 text-center px-4 max-w-4xl">
+              {m.question1}{' '}
+              {m.questionBrand && <span className="text-emerald-600">{m.questionBrand} </span>}
+              {m.question2}
             </h2>
             <div className="w-[150px] h-[150px] sm:w-[200px] sm:h-[200px]" style={{ clipPath: 'url(#logo-mask)' }}>
               <div
@@ -98,17 +103,17 @@ const MapSection = () => {
               />
               <div className="text-white">
                 <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-4 text-center sm:text-left">
-                  Empowering 
-                  <span className="text-yellow-300"> Farmers Across India</span>
+                  {m.title1} 
+                  <span className="text-yellow-300"> {m.titleHighlight}</span>
                 </h2>
                 <p className="text-lg sm:text-xl md:text-2xl max-w-2xl text-center sm:text-left">
-                  Ketaki Adhar has empowered over  
-                  <span className="font-bold text-yellow-300"> 21,000 farmers</span>
+                  {m.text1}{' '}
+                  <span className="font-bold text-yellow-300">{m.stat1}</span>{' '}
                   <span className="relative inline-block mx-1">
-                    <span className="relative z-10">across more than </span>
+                    <span className="relative z-10">{m.text2} </span>
                     <span className="absolute bottom-0 left-0 w-full h-2 bg-green-600/30 -rotate-1" />
                   </span>
-                  <span className="font-bold text-yellow-300">10 Indian states</span>
+                  <span className="font-bold text-yellow-300">{m.stat2}</span>
                 </p>
               </div>
             </motion.div>
@@ -118,9 +123,12 @@ const MapSection = () => {
 
       {/* Mobile simplified content */}
       <div className="block sm:hidden w-full animated-gradient-bg py-16 px-6 text-center text-white">
-        <div className="max-w-2xl mx-auto space-y-8">
+        <div className="max-w-2xl mx-auto space-y-6">
+          <p className="text-sm font-semibold text-emerald-200 uppercase tracking-wider">
+            {m.question1} {m.questionBrand && <span>{m.questionBrand} </span>}{m.question2}
+          </p>
           <h2 className="text-3xl font-bold mb-6">
-            Empowering <span className="text-yellow-300">Farmers Across India</span>
+            {m.title1} <span className="text-yellow-300">{m.titleHighlight}</span>
           </h2>
           <img 
             src="/map-removebg-preview.png" 
@@ -128,9 +136,9 @@ const MapSection = () => {
             className="w-full max-w-md mx-auto" 
           />
           <p className="text-xl leading-relaxed">
-            Ketaki Adhar has empowered over{' '}
-            <span className="font-bold text-yellow-300">21,000 farmers</span> across{' '}
-            <span className="font-bold text-yellow-300">10 Indian states</span>
+            {m.text1}{' '}
+            <span className="font-bold text-yellow-300">{m.stat1}</span> {m.text2}{' '}
+            <span className="font-bold text-yellow-300">{m.stat2}</span>
           </p>
         </div>
       </div>
