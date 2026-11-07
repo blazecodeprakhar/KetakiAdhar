@@ -1,14 +1,19 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { useLanguage } from '../context/LanguageContext';
 
 const RealHeroSection = () => {
+  const { t } = useLanguage();
+  const r = t.realHero;
+
   return (
     <section className="py-20 bg-white">
       <div className="container mx-auto px-4 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-6xl font-bold text-gray-900 mb-8 leading-tight">
-            The Real Hero Behind
-            <span className="block text-primary-600">Your Meal</span>
+            {r.title}
+            <span className="block text-primary-600"> {r.titleHighlight}</span>
           </h2>
         </div>
 
@@ -18,31 +23,37 @@ const RealHeroSection = () => {
           <div className="space-y-8 animate-slide-in-left">
             <div className="space-y-6">
               <p className="text-2xl md:text-3xl font-light text-gray-800 leading-relaxed">
-                He doesn't wear a cape.
+                {r.line1}
               </p>
               <p className="text-2xl md:text-3xl font-semibold text-primary-600 leading-relaxed">
-                But he feeds a nation.
+                {r.line2}
               </p>
               <p className="text-lg text-gray-700 leading-relaxed">
-                While we eat in comfort, a farmer works through heat, rain, and uncertainty.
+                {r.line3}
               </p>
               <p className="text-xl font-medium text-gray-900">
-                Every meal begins with their effort.
+                {r.line4}
               </p>
               <p className="text-lg text-gray-700">
-                They deserve not just thanks, but 
-                <span className="text-primary-600 font-semibold"> respect</span>.
+                {r.line5}
+                <span className="text-primary-600 font-semibold"> {r.line5Highlight}</span>
               </p>
             </div>
 
             {/* Call to action buttons */}
             <div className="flex flex-col sm:flex-row gap-4">
-              <button className="bg-primary-500 text-white px-8 py-4 rounded-full font-semibold hover:bg-primary-600 transition-all transform hover:scale-105 shadow-lg">
-                Support a Farmer
-              </button>
-              <button className="border-2 border-primary-500 text-primary-600 px-8 py-4 rounded-full font-semibold hover:bg-primary-50 transition-all">
-                See Their Stories
-              </button>
+              <Link 
+                to="/donate"
+                className="bg-primary-500 text-white px-8 py-4 rounded-full font-semibold hover:bg-primary-600 transition-all transform hover:scale-105 shadow-lg text-center"
+              >
+                {r.btnSupport}
+              </Link>
+              <Link 
+                to="/our-story"
+                className="border-2 border-primary-500 text-primary-600 px-8 py-4 rounded-full font-semibold hover:bg-primary-50 transition-all text-center"
+              >
+                {r.btnStories}
+              </Link>
             </div>
           </div>
 
@@ -63,23 +74,23 @@ const RealHeroSection = () => {
           <div className="text-center bg-gradient-to-r from-primary-50 to-secondary-50 rounded-3xl p-12">
             <div className="max-w-3xl mx-auto">
               <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
-                Every Grain Tells a Story
+                {r.grainTitle}
               </h3>
               <p className="text-lg text-gray-700 leading-relaxed mb-8">
-                From dawn till dusk, through seasons of plenty and scarcity, farmers work tirelessly to ensure we never go hungry. Their hands shape not just crops, but the foundation of our civilization.
+                {r.grainDesc}
               </p>
               <div className="flex justify-center space-x-8 text-center">
                 <div>
-                  <div className="text-3xl font-bold text-primary-600">600M+</div>
-                  <div className="text-gray-600">Farmers in India</div>
+                  <div className="text-3xl font-bold text-primary-600">{r.stat1Val}</div>
+                  <div className="text-gray-600">{r.stat1Label}</div>
                 </div>
                 <div>
-                  <div className="text-3xl font-bold text-secondary-600">365</div>
-                  <div className="text-gray-600">Days of Hard Work</div>
+                  <div className="text-3xl font-bold text-secondary-600">{r.stat2Val}</div>
+                  <div className="text-gray-600">{r.stat2Label}</div>
                 </div>
                 <div>
-                  <div className="text-3xl font-bold text-accent-600">∞</div>
-                  <div className="text-gray-600">Dedication</div>
+                  <div className="text-3xl font-bold text-accent-600">{r.stat3Val}</div>
+                  <div className="text-gray-600">{r.stat3Label}</div>
                 </div>
               </div>
             </div>
