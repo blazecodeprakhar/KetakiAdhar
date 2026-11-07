@@ -37,9 +37,10 @@ const HomeContactForm = () => {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
+    const sanitizedValue = name === 'phone' ? value.replace(/\D/g, '').slice(0, 10) : value;
     setFormData(prev => ({
       ...prev,
-      [name]: value
+      [name]: sanitizedValue
     }));
   };
 
