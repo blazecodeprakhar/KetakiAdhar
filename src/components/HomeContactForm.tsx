@@ -1,23 +1,41 @@
-import React, { useState } from 'react';
-import { Send, CheckCircle, Heart, Users, Handshake, BookOpen } from 'lucide-react';
+import React, { useState, useRef } from 'react';
+import { Send, CheckCircle, User, Phone, MapPin, Upload, X, FileText, Image as ImageIcon, Sprout } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
+
+interface FarmerFormData {
+  fullName: string;
+  phone: string;
+  acres: string;
+  district: string;
+  taluka: string;
+  village: string;
+  photo: File | null;
+  remarkProblem: string;
+}
+
+const initialFormData: FarmerFormData = {
+  fullName: '',
+  phone: '',
+  acres: '',
+  district: '',
+  taluka: '',
+  village: '',
+  photo: null,
+  remarkProblem: ''
+};
 
 const HomeContactForm = () => {
-  const [formData, setFormData] = useState({
-    fullName: '',
-    email: '',
-    phone: '',
-    contributions: [] as string[]
-  });
+  const { t } = useLanguage();
+  const f = t.farmerForm;
+  const [formData, setFormData] = useState<FarmerFormData>(initialFormData);
+  const [photoPreview, setPhotoPreview] = useState<string | null>(null);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const contributionOptions = [
-    { value: 'volunteer', label: 'Volunteer', icon: Users },
-    { value: 'support', label: 'Support A Farmer', icon: Heart },
-    { value: 'partner', label: 'Partner with Us', icon: Handshake },
-    { value: 'learn', label: 'Learn More', icon: BookOpen }
-  ];
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
@@ -25,64 +43,82 @@ const HomeContactForm = () => {
     }));
   };
 
-  const handleContributionChange = (value: string) => {
-    setFormData(prev => ({
-      ...prev,
-      contributions: prev.contributions.includes(value)
-        ? prev.contributions.filter(item => item !== value)
-        : [...prev.contributions, value]
-    }));
+  const handlePhotoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setFormData(prev => ({ ...prev, photo: file }));
+      const previewUrl = URL.createObjectURL(file);
+      setPhotoPreview(previewUrl);
+    }
+  };
+
+  const handleRemovePhoto = () => {
+    setFormData(prev => ({ ...prev, photo: null }));
+    if (photoPreview) {
+      URL.revokeObjectURL(photoPreview);
+      setPhotoPreview(null);
+    }
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log('Form submitted:', formData);
-    setIsSubmitted(true);
-    
-    // Reset form after 3 seconds
+    setIsSubmitting(true);
+
     setTimeout(() => {
-      setIsSubmitted(false);
-      setFormData({
-        fullName: '',
-        email: '',
-        phone: '',
-        contributions: []
+      console.log('Farmer Information submitted:', {
+        ...formData,
+        photoName: formData.photo ? formData.photo.name : null
       });
-    }, 3000);
+      setIsSubmitting(false);
+      setIsSubmitted(true);
+
+      setTimeout(() => {
+        setIsSubmitted(false);
+        setFormData(initialFormData);
+        if (photoPreview) {
+          URL.revokeObjectURL(photoPreview);
+          setPhotoPreview(null);
+        }
+        if (fileInputRef.current) {
+          fileInputRef.current.value = '';
+        }
+      }, 4000);
+    }, 600);
   };
 
   if (isSubmitted) {
     return (
-      <section className="py-20 bg-gradient-to-br from-primary-50 to-secondary-50">
+      <section className="py-20 bg-gradient-to-br from-primary-50 via-white to-secondary-50">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="max-w-2xl mx-auto text-center">
-            <div className="bg-white rounded-3xl shadow-xl p-12">
-              <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-8">
-                <CheckCircle className="w-10 h-10 text-green-600" />
+            <div className="bg-white rounded-3xl shadow-xl p-8 md:p-12 border border-primary-100">
+              <div className="w-20 h-20 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                <CheckCircle className="w-10 h-10 text-primary-600" />
               </div>
-              
-              <h3 className="text-3xl font-bold text-gray-900 mb-6">
-                Thank you for reaching out!
+
+              <h3 className="text-3xl font-bold text-gray-900 mb-4">
+                {f.successTitle}
               </h3>
-              
-              <p className="text-lg text-gray-700 leading-relaxed mb-8">
-                We've received your message and will get in touch with you shortly. 
-                Together, let's build a stronger future for our farmers.
+
+              <p className="text-lg text-gray-600 leading-relaxed mb-8">
+                {f.successDesc}
               </p>
-              
-              <div className="flex justify-center space-x-8 text-center">
-                <div>
-                  <div className="text-2xl font-bold text-primary-600">24hrs</div>
-                  <div className="text-gray-600 text-sm">Response Time</div>
+
+              <div className="grid grid-cols-3 gap-4 pt-6 border-t border-gray-100">
+                <div className="p-3 bg-primary-50 rounded-2xl">
+                  <div className="text-xl font-bold text-primary-700">{f.reviewTime}</div>
+                  <div className="text-xs text-gray-600 mt-1">{f.reviewTimeDesc}</div>
                 </div>
-                <div>
-                  <div className="text-2xl font-bold text-secondary-600">100%</div>
-                  <div className="text-gray-600 text-sm">Commitment</div>
+                <div className="p-3 bg-secondary-50 rounded-2xl">
+                  <div className="text-xl font-bold text-secondary-700">{f.fieldAssistance}</div>
+                  <div className="text-xs text-gray-600 mt-1">{f.fieldAssistanceDesc}</div>
                 </div>
-                <div>
-                  <div className="text-2xl font-bold text-accent-600">∞</div>
-                  <div className="text-gray-600 text-sm">Impact Together</div>
+                <div className="p-3 bg-accent-50 rounded-2xl">
+                  <div className="text-xl font-bold text-accent-700">{f.dedicatedSupport}</div>
+                  <div className="text-xs text-gray-600 mt-1">{f.dedicatedSupportDesc}</div>
                 </div>
               </div>
             </div>
@@ -93,145 +129,260 @@ const HomeContactForm = () => {
   }
 
   return (
-    <section className="py-20 bg-gradient-to-br from-primary-50 to-secondary-50">
+    <section className="py-20 bg-gradient-to-br from-primary-50 via-white to-secondary-50" id="farmer-form">
       <div className="container mx-auto px-4 lg:px-8">
-        <div className="max-w-2xl mx-auto">
+        <div className="max-w-3xl mx-auto">
           {/* Header */}
-          <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              Want to Support Farmers
-              <span className="block text-primary-600">with Us?</span>
+          <div className="text-center mb-10">
+            <div className="inline-flex items-center space-x-2 bg-primary-100 text-primary-800 px-4 py-1.5 rounded-full text-sm font-semibold mb-4">
+              <Sprout className="w-4 h-4 text-primary-600" />
+              <span>{f.badge}</span>
+            </div>
+            <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-4">
+              {f.title}
             </h2>
-            <p className="text-xl text-gray-600 leading-relaxed">
-              Join our mission or get in touch. We'd love to hear from you.
+            <p className="text-lg text-gray-600 max-w-xl mx-auto leading-relaxed">
+              {f.subtitle}
             </p>
           </div>
 
-          {/* Form */}
-          <div className="bg-white rounded-3xl shadow-xl p-8">
+          {/* Form Card */}
+          <div className="bg-white rounded-3xl shadow-xl border border-gray-100 p-6 md:p-10">
             <form onSubmit={handleSubmit} className="space-y-6">
-              {/* Full Name */}
-              <div>
-                <label htmlFor="fullName" className="block text-sm font-semibold text-gray-700 mb-2">
-                  Full Name *
-                </label>
-                <input
-                  type="text"
-                  id="fullName"
-                  name="fullName"
-                  value={formData.fullName}
-                  onChange={handleInputChange}
-                  required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
-                  placeholder="Enter your full name"
-                />
-              </div>
-
-              {/* Email */}
-              <div>
-                <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-2">
-                  Email Address *
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
-                  placeholder="Enter your email address"
-                />
-              </div>
-
-              {/* Phone */}
-              <div>
-                <label htmlFor="phone" className="block text-sm font-semibold text-gray-700 mb-2">
-                  Phone Number <span className="text-gray-500">(optional)</span>
-                </label>
-                <input
-                  type="tel"
-                  id="phone"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
-                  placeholder="Enter your phone number"
-                />
-              </div>
-
-              {/* Contribution Options */}
-              <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-4">
-                  How Would You Like to Contribute? *
-                </label>
-                <div className="grid md:grid-cols-2 gap-4">
-                  {contributionOptions.map((option) => {
-                    const Icon = option.icon;
-                    const isSelected = formData.contributions.includes(option.value);
-                    
-                    return (
-                      <div
-                        key={option.value}
-                        className={`relative cursor-pointer transition-all duration-300 ${
-                          isSelected 
-                            ? 'bg-primary-50 border-2 border-primary-500 shadow-md' 
-                            : 'bg-gray-50 border-2 border-gray-200 hover:border-primary-300 hover:bg-primary-25'
-                        } rounded-xl p-4`}
-                        onClick={() => handleContributionChange(option.value)}
-                      >
-                        <div className="flex items-center space-x-3">
-                          <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
-                            isSelected ? 'bg-primary-500' : 'bg-gray-300'
-                          } transition-colors`}>
-                            <Icon className={`w-5 h-5 ${isSelected ? 'text-white' : 'text-gray-600'}`} />
-                          </div>
-                          <div className="flex-1">
-                            <span className={`font-medium ${
-                              isSelected ? 'text-primary-700' : 'text-gray-700'
-                            }`}>
-                              {option.label}
-                            </span>
-                          </div>
-                          <div className={`w-5 h-5 rounded border-2 flex items-center justify-center ${
-                            isSelected 
-                              ? 'bg-primary-500 border-primary-500' 
-                              : 'border-gray-300'
-                          } transition-colors`}>
-                            {isSelected && (
-                              <CheckCircle className="w-3 h-3 text-white" />
-                            )}
-                          </div>
-                        </div>
-                      </div>
-                    );
-                  })}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* Full Name */}
+                <div className="md:col-span-2">
+                  <label htmlFor="fullName" className="block text-sm font-semibold text-gray-700 mb-2">
+                    {f.fullName} <span className="text-red-500">*</span>
+                  </label>
+                  <div className="relative">
+                    <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-400">
+                      <User className="w-5 h-5" />
+                    </div>
+                    <input
+                      type="text"
+                      id="fullName"
+                      name="fullName"
+                      value={formData.fullName}
+                      onChange={handleInputChange}
+                      required
+                      className="w-full pl-11 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all text-gray-900 placeholder-gray-400"
+                      placeholder={f.fullNamePlaceholder}
+                    />
+                  </div>
                 </div>
-                {formData.contributions.length === 0 && (
-                  <p className="text-sm text-gray-500 mt-2">Please select at least one option</p>
-                )}
+
+                {/* Number */}
+                <div>
+                  <label htmlFor="phone" className="block text-sm font-semibold text-gray-700 mb-2">
+                    {f.phone} <span className="text-red-500">*</span>
+                  </label>
+                  <div className="relative">
+                    <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-400">
+                      <Phone className="w-5 h-5" />
+                    </div>
+                    <input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      required
+                      className="w-full pl-11 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all text-gray-900 placeholder-gray-400"
+                      placeholder={f.phonePlaceholder}
+                    />
+                  </div>
+                </div>
+
+                {/* How many Acres */}
+                <div>
+                  <label htmlFor="acres" className="block text-sm font-semibold text-gray-700 mb-2">
+                    {f.acres} <span className="text-red-500">*</span>
+                  </label>
+                  <div className="relative">
+                    <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-400">
+                      <Sprout className="w-5 h-5" />
+                    </div>
+                    <input
+                      type="text"
+                      id="acres"
+                      name="acres"
+                      value={formData.acres}
+                      onChange={handleInputChange}
+                      required
+                      className="w-full pl-11 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all text-gray-900 placeholder-gray-400"
+                      placeholder={f.acresPlaceholder}
+                    />
+                  </div>
+                </div>
+
+                {/* District */}
+                <div>
+                  <label htmlFor="district" className="block text-sm font-semibold text-gray-700 mb-2">
+                    {f.district} <span className="text-red-500">*</span>
+                  </label>
+                  <div className="relative">
+                    <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-400">
+                      <MapPin className="w-5 h-5" />
+                    </div>
+                    <input
+                      type="text"
+                      id="district"
+                      name="district"
+                      value={formData.district}
+                      onChange={handleInputChange}
+                      required
+                      className="w-full pl-11 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all text-gray-900 placeholder-gray-400"
+                      placeholder={f.districtPlaceholder}
+                    />
+                  </div>
+                </div>
+
+                {/* Taluka */}
+                <div>
+                  <label htmlFor="taluka" className="block text-sm font-semibold text-gray-700 mb-2">
+                    {f.taluka} <span className="text-red-500">*</span>
+                  </label>
+                  <div className="relative">
+                    <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-400">
+                      <MapPin className="w-5 h-5" />
+                    </div>
+                    <input
+                      type="text"
+                      id="taluka"
+                      name="taluka"
+                      value={formData.taluka}
+                      onChange={handleInputChange}
+                      required
+                      className="w-full pl-11 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all text-gray-900 placeholder-gray-400"
+                      placeholder={f.talukaPlaceholder}
+                    />
+                  </div>
+                </div>
+
+                {/* Village */}
+                <div className="md:col-span-2">
+                  <label htmlFor="village" className="block text-sm font-semibold text-gray-700 mb-2">
+                    {f.village} <span className="text-red-500">*</span>
+                  </label>
+                  <div className="relative">
+                    <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-400">
+                      <MapPin className="w-5 h-5" />
+                    </div>
+                    <input
+                      type="text"
+                      id="village"
+                      name="village"
+                      value={formData.village}
+                      onChange={handleInputChange}
+                      required
+                      className="w-full pl-11 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all text-gray-900 placeholder-gray-400"
+                      placeholder={f.villagePlaceholder}
+                    />
+                  </div>
+                </div>
+
+                {/* Photo (Optional) */}
+                <div className="md:col-span-2">
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    {f.photo} <span className="text-gray-500 font-normal">{f.optional}</span>
+                  </label>
+
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    id="photo"
+                    name="photo"
+                    accept="image/*"
+                    onChange={handlePhotoChange}
+                    className="hidden"
+                  />
+
+                  {!photoPreview ? (
+                    <button
+                      type="button"
+                      onClick={() => fileInputRef.current?.click()}
+                      className="w-full border-2 border-dashed border-gray-300 hover:border-primary-500 rounded-2xl p-6 text-center transition-colors bg-gray-50/50 hover:bg-primary-50/30 flex flex-col items-center justify-center cursor-pointer group"
+                    >
+                      <div className="w-12 h-12 rounded-full bg-primary-100 group-hover:bg-primary-200 text-primary-700 flex items-center justify-center mb-2 transition-colors">
+                        <Upload className="w-6 h-6" />
+                      </div>
+                      <span className="text-sm font-medium text-gray-800">
+                        {f.uploadPrompt}
+                      </span>
+                      <span className="text-xs text-gray-500 mt-1">
+                        {f.uploadLimit}
+                      </span>
+                    </button>
+                  ) : (
+                    <div className="relative rounded-2xl border border-gray-200 p-3 bg-gray-50 flex items-center space-x-4">
+                      <img
+                        src={photoPreview}
+                        alt="Farm preview"
+                        className="w-16 h-16 object-cover rounded-xl border border-gray-200"
+                      />
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center space-x-2">
+                          <ImageIcon className="w-4 h-4 text-primary-600 flex-shrink-0" />
+                          <p className="text-sm font-medium text-gray-900 truncate">
+                            {formData.photo?.name}
+                          </p>
+                        </div>
+                        <p className="text-xs text-gray-500 mt-0.5">
+                          {formData.photo ? `${(formData.photo.size / (1024 * 1024)).toFixed(2)} MB` : ''}
+                        </p>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={handleRemovePhoto}
+                        className="p-2 rounded-lg text-gray-400 hover:text-red-500 hover:bg-red-50 transition-colors"
+                        title="Remove photo"
+                      >
+                        <X className="w-5 h-5" />
+                      </button>
+                    </div>
+                  )}
+                </div>
+
+                {/* Remark Problem */}
+                <div className="md:col-span-2">
+                  <label htmlFor="remarkProblem" className="block text-sm font-semibold text-gray-700 mb-2">
+                    {f.remarkProblem} <span className="text-red-500">*</span>
+                  </label>
+                  <div className="relative">
+                    <div className="absolute top-3.5 left-3.5 pointer-events-none text-gray-400">
+                      <FileText className="w-5 h-5" />
+                    </div>
+                    <textarea
+                      id="remarkProblem"
+                      name="remarkProblem"
+                      rows={4}
+                      value={formData.remarkProblem}
+                      onChange={handleInputChange}
+                      required
+                      className="w-full pl-11 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all text-gray-900 placeholder-gray-400 resize-y"
+                      placeholder={f.remarkPlaceholder}
+                    />
+                  </div>
+                </div>
               </div>
 
               {/* Submit Button */}
               <button
                 type="submit"
-                disabled={formData.contributions.length === 0}
-                className={`w-full py-4 px-8 rounded-xl font-semibold transition-all transform hover:scale-105 shadow-lg flex items-center justify-center space-x-2 ${
-                  formData.contributions.length > 0
-                    ? 'bg-gradient-to-r from-primary-500 to-secondary-500 text-white hover:from-primary-600 hover:to-secondary-600'
-                    : 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                }`}
+                disabled={isSubmitting}
+                className="w-full py-4 px-8 rounded-xl font-semibold transition-all transform hover:scale-[1.01] active:scale-[0.99] shadow-lg flex items-center justify-center space-x-2 bg-gradient-to-r from-primary-600 to-secondary-600 hover:from-primary-700 hover:to-secondary-700 text-white disabled:opacity-70 disabled:cursor-not-allowed"
               >
                 <Send className="w-5 h-5" />
-                <span>Join Our Mission</span>
+                <span>{isSubmitting ? f.submittingBtn : f.submitBtn}</span>
               </button>
             </form>
           </div>
 
-          {/* Bottom encouragement */}
-          <div className="text-center mt-8">
-            <p className="text-gray-600">
-              Every contribution, big or small, makes a difference in a farmer's life.
+          {/* Bottom note */}
+          <div className="text-center mt-6">
+            <p className="text-sm text-gray-500">
+              {f.footnote}
             </p>
           </div>
         </div>
