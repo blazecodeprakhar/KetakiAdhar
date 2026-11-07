@@ -1,7 +1,12 @@
 import React from 'react';
-import { Heart, Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
+import { Mail, MapPin, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { useLanguage } from '../context/LanguageContext';
 
 const Footer = () => {
+  const { t } = useLanguage();
+  const f = t.footer;
+
   const socialLinks = [
     { icon: Facebook, href: '#', label: 'Facebook' },
     { icon: Twitter, href: '#', label: 'Twitter' },
@@ -10,21 +15,21 @@ const Footer = () => {
   ];
 
   const quickLinks = [
-    { label: 'Our Story', href: '/our-story' },
-    { label: 'Career', href: '/careers' },
-    { label: 'Why Farmers Matter', href: '#programs' },
-    { label: 'Our Initiatives', href: '#volunteer' },
-    { label: 'FAQ', href: '/faq' },
-    { label: 'Contact Us', href: '/contact' },
+    { label: t.nav.story, href: '/our-story' },
+    { label: t.nav.careers, href: '/careers' },
+    { label: t.nav.whyFarmers, href: '/#why-farmers' },
+    { label: t.nav.initiatives, href: '/#initiatives' },
+    { label: t.nav.faq, href: '/faq' },
+    { label: t.nav.contact, href: '/contact' },
   ];
 
   const supportLinks = [
-    { label: 'Donate', href: '#donate' },
-    { label: 'Volunteer', href: '#volunteer' },
-    { label: 'Partner with Us', href: '#partner' },
-    { label: 'Corporate CSR', href: '#csr' },
-    { label: 'Media Kit', href: '#media' },
-    { label: 'Annual Reports', href: '#reports' },
+    { label: f.donate, href: '/donate' },
+    { label: f.volunteer, href: '/volunteer' },
+    { label: f.partner, href: '/contact' },
+    { label: f.csr, href: '/contact' },
+    { label: f.mediaKit, href: '/contact' },
+    { label: f.annualReports, href: '/our-story' },
   ];
 
   return (
@@ -34,11 +39,13 @@ const Footer = () => {
           {/* Brand section */}
           <div className="space-y-6">
             <div className="flex items-center space-x-2">
-              <span className="text-2xl font-bold">Ketaki Adhar</span>
+              <Link to="/" className="text-2xl font-bold hover:text-primary-400 transition-colors">
+                Ketaki Adhar
+              </Link>
             </div>
-            
+
             <p className="text-gray-400 leading-relaxed">
-              Standing with India's farmers through respect, support, and sustainable solutions. Building a future where agriculture thrives and farmers prosper.
+              {f.about}
             </p>
 
             <div className="flex space-x-4">
@@ -57,33 +64,33 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-lg font-semibold mb-6">Quick Links</h3>
+            <h3 className="text-lg font-semibold mb-6">{f.quickLinks}</h3>
             <ul className="space-y-3">
               {quickLinks.map((link) => (
                 <li key={link.label}>
-                  <a 
-                    href={link.href}
+                  <Link
+                    to={link.href}
                     className="text-gray-400 hover:text-white transition-colors"
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Support */}
+          {/* Support / Get Involved */}
           <div>
-            <h3 className="text-lg font-semibold mb-6">Get Involved</h3>
+            <h3 className="text-lg font-semibold mb-6">{f.getInvolved}</h3>
             <ul className="space-y-3">
               {supportLinks.map((link) => (
                 <li key={link.label}>
-                  <a 
-                    href={link.href}
+                  <Link
+                    to={link.href}
                     className="text-gray-400 hover:text-white transition-colors"
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -91,24 +98,27 @@ const Footer = () => {
 
           {/* Contact */}
           <div>
-            <h3 className="text-lg font-semibold mb-6">Contact Us</h3>
+            <h3 className="text-lg font-semibold mb-6">{f.contactUs}</h3>
             <div className="space-y-4">
               <div className="flex items-start space-x-3">
                 <MapPin className="w-5 h-5 text-primary-400 mt-1 flex-shrink-0" />
                 <div>
-                  <p className="text-gray-400">
-                    Mahatma Gandhi road, Mumbai,<br />
-                    India
+                  <p className="text-gray-400 leading-relaxed">
+                    {f.address}
                   </p>
                 </div>
               </div>
-              
+
               <div className="flex items-center space-x-3">
-                <Mail className="w-5 h-5 text-primary-400" />
-                <span className="text-gray-400">info@ketakiadhar.com</span>
+                <Mail className="w-5 h-5 text-primary-400 flex-shrink-0" />
+                <a 
+                  href="mailto:info@ketakiadhar.in" 
+                  className="text-gray-400 hover:text-primary-400 transition-colors"
+                >
+                  info@ketakiadhar.in
+                </a>
               </div>
             </div>
-           
           </div>
         </div>
       </div>
@@ -116,20 +126,20 @@ const Footer = () => {
       {/* Bottom section */}
       <div className="border-t border-gray-800">
         <div className="container mx-auto px-4 lg:px-8 py-6">
-          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0 text-center md:text-left">
             <p className="text-gray-400 text-sm">
-              © 2024 Ketaki Adhar. All rights reserved. Building a better future for farmers.
+              {f.copyright}
             </p>
-            <div className="flex space-x-6 text-sm">
-              <a href="#privacy" className="text-gray-400 hover:text-white transition-colors">
-                Privacy Policy
-              </a>
-              <a href="#terms" className="text-gray-400 hover:text-white transition-colors">
-                Terms of Service
-              </a>
-              <a href="#cookies" className="text-gray-400 hover:text-white transition-colors">
-                Cookie Policy
-              </a>
+            <div className="flex flex-wrap justify-center gap-6 text-sm">
+              <Link to="/contact" className="text-gray-400 hover:text-white transition-colors">
+                {f.privacyPolicy}
+              </Link>
+              <Link to="/contact" className="text-gray-400 hover:text-white transition-colors">
+                {f.termsOfService}
+              </Link>
+              <Link to="/contact" className="text-gray-400 hover:text-white transition-colors">
+                {f.cookiePolicy}
+              </Link>
             </div>
           </div>
         </div>
