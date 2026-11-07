@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Users, TrendingUp } from 'lucide-react';
-import { span } from 'framer-motion/client';
+import { useLanguage } from '../context/LanguageContext';
 
 const StatisticsSection = () => {
+  const { t } = useLanguage();
+  const s = t.statistics;
   const [isVisible, setIsVisible] = useState(false);
   const [count, setCount] = useState(0);
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -41,12 +43,12 @@ const StatisticsSection = () => {
           <div className="space-y-4 animate-slide-in-left">
             <div className="space-y-4">
               <h2 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
-              <span className="text-primary-600"> 21,000+ </span>
-               Farmers Empowered by 
-              <span className="text-primary-600"> Ketaki Adhar</span>
+                <span className="text-primary-600">{s.number} </span>
+                {s.titleMiddle}
+                <span className="text-primary-600"> {s.brand}</span>
               </h2>
               <p className="text-xl text-gray-600 leading-relaxed">
-              Over 21,000 farmers across India have received support through seeds, fertilizers, organic farming education, soil testing, tree plantation, and healthcare.
+                {s.desc}
               </p>
             </div>
 
@@ -55,39 +57,35 @@ const StatisticsSection = () => {
                 <Users className="w-6 h-6 text-white" />
               </div>
               <div>
-                <h3 className="text-lg font-semibold text-gray-900">600+ Million People</h3>
-                <p className="text-gray-600">Depend on agriculture for their livelihood</p>
+                <h3 className="text-lg font-semibold text-gray-900">{s.card1Title}</h3>
+                <p className="text-gray-600">{s.card1Desc}</p>
+              </div>
+            </div>
+
+            <div className="flex items-center space-x-4 p-6 bg-secondary-50 rounded-2xl">
+              <div className="w-12 h-12 bg-secondary-500 rounded-full flex items-center justify-center">
+                <TrendingUp className="w-6 h-6 text-white" />
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold text-gray-900">{s.card2Title}</h3>
+                <p className="text-gray-600">{s.card2Desc}</p>
               </div>
             </div>
           </div>
 
-          {/* Right Side - Animated Counter */}
-          <div className="flex justify-center lg:justify-end animate-slide-in-right">
-            <div className="relative">
-              {/* Background circle */}
-              <div className="w-80 h-80 rounded-full bg-gradient-to-br from-primary-100 to-secondary-100 flex items-center justify-center relative overflow-hidden p-4">
-                <div className="absolute inset-4 rounded-full bg-white shadow-inner"></div>
-                
-                {/* Counter */}
-                <div className="relative z-10 text-center px-4">
-                  <div className="text-5xl md:text-6xl font-bold text-primary-600 leading-tight">
-                    {count.toLocaleString()}+
-                  </div>
-                  <div className="text-gray-700 font-medium text-lg">
-                    Farmers Empowered
-                  </div>
-                  <div className="flex items-center justify-center mt-4">
-                    <TrendingUp className="w-5 h-5 text-primary-500 mr-2" />
-                    <span className="text-sm text-gray-600">Growing Impact</span>
-                  </div>
-                </div>
-
-                {/* Decorative elements */}
-                <div className="absolute top-8 right-8 w-4 h-4 bg-accent-400 rounded-full animate-pulse-slow"></div>
-                <div className="absolute bottom-12 left-12 w-3 h-3 bg-primary-400 rounded-full animate-pulse-slow" style={{ animationDelay: '1s' }}></div>
-                <div className="absolute top-1/2 left-8 w-2 h-2 bg-secondary-400 rounded-full animate-pulse-slow" style={{ animationDelay: '2s' }}></div>
-              </div>
+          {/* Right Side - Counter / Stats Display */}
+          <div className="bg-gradient-to-br from-primary-50 to-secondary-50 rounded-3xl p-8 md:p-12 text-center">
+            <div className="inline-block p-4 bg-white rounded-2xl shadow-lg mb-6">
+              <span className="text-5xl md:text-6xl font-extrabold text-primary-600 font-mono">
+                {count.toLocaleString()}+
+              </span>
             </div>
+            <h3 className="text-2xl font-bold text-gray-900 mb-2">
+              {s.titleMiddle} {s.brand}
+            </h3>
+            <p className="text-gray-600">
+              {s.desc}
+            </p>
           </div>
         </div>
       </div>
