@@ -1,48 +1,36 @@
-
+import React from 'react';
+import { useLanguage } from '../context/LanguageContext';
 
 const SupportArea = () => {
-  const challenges = [
-    {
-      title: "Seed Distribution",
-      detail: "We provide access to high-quality seeds that help farmers achieve better yield, improve crop health, and strengthen food security. All of this is offered free of cost to the farmer.",
-      image: "/seed.png"
-    },
-    {
-      title: "Soil Testing",
-      detail: "Healthy soil is the foundation of a good harvest. We conduct regular soil tests and offer practical guidance on improving fertility through natural and sustainable methods.",
-      image: "/soil_test.png"
-    },
-    {
-      title: "Medical Assistance",
-      detail: "Through our rural medical camps, we bring essential healthcare to farmers and their families, especially in areas where medical facilities are hard to reach.",
-      image: "/medical.png"
-    },
-    {
-      title: "Daily Weather Updates",
-      detail: "We provide timely and accurate weather reports that help farmers make informed decisions about sowing, irrigation, and harvesting. This reduces risk and protects their crops.",
-      image: "/weather.png"
-    }
+  const { t } = useLanguage();
+  const s = t.supportArea;
+
+  const images = [
+    '/seed.png',
+    '/soil_test.png',
+    '/medical.png',
+    '/weather.png'
   ];
 
   return (
-    <section className="py-8 bg-gray-50">
+    <section id="initiatives" className="py-12 bg-gray-50 scroll-mt-20">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-           Our Core 
-            <span className="text-primary-600"> Support Areas</span>
+            {s.title} 
+            <span className="text-primary-600"> {s.titleHighlight}</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-          Cultivating Success: The Fundamental Cornerstones of Our Support
+            {s.subtitle}
           </p>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {challenges.map((challenge, index) => (
+          {s.items.map((challenge, index) => (
             <div key={index} className="group transition-all duration-300 ease-in-out hover:-translate-y-2">
               <div className="relative overflow-hidden rounded-xl shadow-lg cursor-pointer">
                 <img
-                  src={challenge.image}
+                  src={images[index]}
                   alt={challenge.title}
                   className="w-full h-[400px] object-cover"
                 />
@@ -60,7 +48,6 @@ const SupportArea = () => {
               </div>
               <div className="pt-6">
                 <p className="text-gray-700 text-base leading-relaxed mb-4">{challenge.detail}</p>
-                
               </div>
             </div>
           ))}
