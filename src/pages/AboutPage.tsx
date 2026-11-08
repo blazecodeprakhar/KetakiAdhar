@@ -56,14 +56,14 @@ const AboutUs = () => {
 
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link 
-                  to="/donate" 
+                  to="/donate#pledge-form" 
                   className="bg-primary-500 text-white px-8 py-4 rounded-full font-semibold hover:bg-primary-600 transition-all transform hover:scale-105 shadow-lg flex items-center justify-center space-x-2"
                 >
                   <span>{a.btnImpact}</span>
                   <ArrowRight className="w-5 h-5" />
                 </Link>
                 <Link 
-                  to="/volunteer"
+                  to="/volunteer#volunteer-form"
                   className="border-2 border-primary-500 text-primary-600 px-8 py-4 rounded-full font-semibold hover:bg-primary-50 transition-all text-center"
                 >
                   {a.btnMission}
@@ -221,13 +221,13 @@ const AboutUs = () => {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link 
-                  to="/donate"
+                  to="/donate#pledge-form"
                   className="bg-white text-primary-600 px-8 py-4 rounded-full font-bold hover:bg-gray-100 transition-all transform hover:scale-105 shadow-lg text-center"
                 >
                   {a.ctaBtn1}
                 </Link>
                 <Link 
-                  to="/volunteer"
+                  to="/volunteer#volunteer-form"
                   className="border-2 border-white text-white px-8 py-4 rounded-full font-bold hover:bg-white hover:text-primary-600 transition-all text-center"
                 >
                   {a.ctaBtn2}

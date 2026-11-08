@@ -43,7 +43,7 @@ const RealHeroSection = () => {
             {/* Call to action buttons */}
             <div className="flex flex-col sm:flex-row gap-4">
               <Link 
-                to="/donate"
+                to="/donate#pledge-form"
                 className="bg-primary-500 text-white px-8 py-4 rounded-full font-semibold hover:bg-primary-600 transition-all transform hover:scale-105 shadow-lg text-center"
               >
                 {r.btnSupport}

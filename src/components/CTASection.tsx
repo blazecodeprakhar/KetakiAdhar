@@ -23,7 +23,7 @@ const CTASection = () => {
       title: c.card2Title,
       description: c.card2Desc,
       buttonText: c.card2Btn,
-      link: "/donate",
+      link: "/donate#pledge-form",
       color: "from-accent-500 to-accent-600",
       bgColor: "bg-accent-50",
       hoverColor: "hover:bg-accent-100"
@@ -33,7 +33,7 @@ const CTASection = () => {
       title: c.card3Title,
       description: c.card3Desc,
       buttonText: c.card3Btn,
-      link: "/volunteer",
+      link: "/volunteer#volunteer-form",
       color: "from-secondary-500 to-secondary-600",
       bgColor: "bg-secondary-50",
       hoverColor: "hover:bg-secondary-100"
@@ -118,7 +118,7 @@ const CTASection = () => {
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link 
-                to="/donate"
+                to="/donate#pledge-form"
                 className="bg-accent-500 text-white px-8 py-4 rounded-full font-bold hover:bg-accent-600 transition-all transform hover:scale-105 shadow-lg text-center"
               >
                 {c.urgencyBtn1}

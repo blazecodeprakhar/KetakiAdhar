@@ -24,7 +24,7 @@ const Header = () => {
     { label: t.nav.careers, href: '/careers' },
     { label: t.nav.whyFarmers, href: '/#why-farmers' },
     { label: t.nav.initiatives, href: '/#initiatives' },
-    { label: t.nav.volunteer, href: '/volunteer' },
+    { label: t.nav.volunteer, href: '/volunteer#volunteer-form' },
     { label: t.nav.faq, href: '/faq' },
     { label: t.nav.contact, href: '/contact' },
   ];
@@ -68,7 +68,7 @@ const Header = () => {
 
             {/* Donate CTA */}
             <Link 
-              to="/donate"
+              to="/donate#pledge-form"
               className="bg-primary-500 text-white px-5 py-2 rounded-full font-medium hover:bg-primary-600 transition-colors shadow-sm"
             >
               {t.nav.donateNow}
@@ -120,7 +120,7 @@ const Header = () => {
           </div>
           <div className="px-4 pb-4">
             <Link 
-              to="/donate" 
+              to="/donate#pledge-form" 
               onClick={() => setIsMobileMenuOpen(false)}
               className="block w-full text-center bg-primary-500 text-white px-6 py-2.5 rounded-full font-medium hover:bg-primary-600 transition-colors"
             >

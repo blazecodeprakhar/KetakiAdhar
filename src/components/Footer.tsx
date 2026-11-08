@@ -24,8 +24,8 @@ const Footer = () => {
   ];
 
   const supportLinks = [
-    { label: f.donate, href: '/donate' },
-    { label: f.volunteer, href: '/volunteer' },
+    { label: f.donate, href: '/donate#pledge-form' },
+    { label: f.volunteer, href: '/volunteer#volunteer-form' },
     { label: f.partner, href: '/contact' },
     { label: f.csr, href: '/contact' },
     { label: f.mediaKit, href: '/contact' },
