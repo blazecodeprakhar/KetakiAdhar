@@ -19,6 +19,7 @@ import Careers from './pages/Careers';
 import VolunteerPage from './pages/VolunteerPage';
 import DonationPage from './pages/DonationPage';
 import { LanguageProvider } from './context/LanguageContext';
+import InitialLanguageModal from './components/InitialLanguageModal';
 
 const Home = () => (
   <>
@@ -41,6 +42,7 @@ function App() {
     <LanguageProvider>
       <Router>
         <div className="min-h-screen flex flex-col">
+          <InitialLanguageModal />
           <ScrollToTop />
           <Header />
           <main className="flex-grow">
