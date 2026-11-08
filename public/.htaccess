@@ -1,0 +1,76 @@
+# ==============================================================================
+# Ketaki Adhar - Apache Server Configuration (.htaccess)
+# Handles SPA React Router rewrites, HTTPS enforcement, redirects & caching
+# ==============================================================================
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # ----------------------------------------------------------------------
+  # 1. Force HTTPS (ignore localhost / local development)
+  # ----------------------------------------------------------------------
+  RewriteCond %{HTTPS} off
+  RewriteCond %{HTTP_HOST} !^localhost [NC]
+  RewriteCond %{HTTP_HOST} !^127\.0\.0\.1 [NC]
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  # ----------------------------------------------------------------------
+  # 2. Redirect Common Aliases & Legacy URLs
+  # ----------------------------------------------------------------------
+  RewriteRule ^about/?$ /our-story [R=301,L]
+  RewriteRule ^about-us/?$ /our-story [R=301,L]
+  RewriteRule ^donations/?$ /donate [R=301,L]
+  RewriteRule ^volunteering/?$ /volunteer [R=301,L]
+  RewriteRule ^programs/?$ /#initiatives [R=301,NE,L]
+  RewriteRule ^initiatives/?$ /#initiatives [R=301,NE,L]
+
+  # ----------------------------------------------------------------------
+  # 3. React Single Page Application (SPA) Routing Fallback
+  # If requested resource is not an existing physical file or directory,
+  # rewrite the request to index.html for client-side routing.
+  # ----------------------------------------------------------------------
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^ index.html [QSA,L]
+</IfModule>
+
+# ----------------------------------------------------------------------
+# 4. Fallback 404 Error Document
+# ----------------------------------------------------------------------
+ErrorDocument 404 /index.html
+
+# ----------------------------------------------------------------------
+# 5. Security & Protection Headers
+# ----------------------------------------------------------------------
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set X-XSS-Protection "1; mode=block"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+
+  # Cache Control for HTML documents: never cache index.html so updates are instant
+  <FilesMatch "\.(html|htm)$">
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+    Header set Pragma "no-cache"
+    Header set Expires 0
+  </FilesMatch>
+
+  # Cache Control for fingerprinted/immutable assets (JS, CSS, fonts, images)
+  <FilesMatch "\.(js|css|avif|webp|png|jpe?g|gif|ico|svg|woff2?|ttf|eot)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+</IfModule>
+
+# ----------------------------------------------------------------------
+# 6. GZIP Compression (mod_deflate)
+# ----------------------------------------------------------------------
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json application/xml image/svg+xml
+</IfModule>
+
+# ----------------------------------------------------------------------
+# 7. Disable Directory Browsing
+# ----------------------------------------------------------------------
+Options -Indexes
