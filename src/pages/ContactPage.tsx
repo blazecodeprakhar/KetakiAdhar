@@ -22,21 +22,15 @@ const ContactUs = () => {
       icon: MapPin,
       title: c.officeTitle,
       details: [c.officeAddress],
-      color: "from-primary-500 to-primary-600"
+      color: "from-primary-500 to-primary-600",
+      isEmail: false
     },
     {
       icon: Mail,
       title: c.emailTitle,
-      details: ["info@ketakiadhar.in
-                  <button
-                    type="button"
-                    onClick={handleCopyEmail}
-                    className="ml-2 text-xs bg-primary-100 hover:bg-primary-200 text-primary-800 px-2 py-0.5 rounded-md font-medium transition-colors cursor-pointer"
-                    title="Copy email address"
-                  >
-                    {copied ? 'Copied!' : 'Copy'}
-                  </button>", c.emailResponse],
-      color: "from-accent-500 to-accent-600"
+      details: ["info@ketakiadhar.in", c.emailResponse],
+      color: "from-accent-500 to-accent-600",
+      isEmail: true
     }
   ];
 
@@ -110,7 +104,19 @@ const ContactUs = () => {
                   <h3 className="text-xl font-bold text-gray-900 mb-4">{info.title}</h3>
                   <div className="space-y-2">
                     {info.details.map((detail, idx) => (
-                      <p key={idx} className="text-gray-600">{detail}</p>
+                      <p key={idx} className="text-gray-600 flex items-center flex-wrap">
+                        <span>{detail}</span>
+                        {info.isEmail && idx === 0 && (
+                          <button
+                            type="button"
+                            onClick={handleCopyEmail}
+                            className="ml-2 text-xs bg-primary-100 hover:bg-primary-200 text-primary-800 px-2 py-0.5 rounded-md font-medium transition-colors cursor-pointer"
+                            title="Copy email address"
+                          >
+                            {copied ? 'Copied!' : 'Copy'}
+                          </button>
+                        )}
+                      </p>
                     ))}
                   </div>
                 </div>
