@@ -31,7 +31,7 @@ export const translations = {
       brand: 'Ketaki Adhar',
       line2: 'Helps Farmers',
       line3: 'Grow and Thrive',
-      scroll: 'Scroll to Learn More',
+      scroll: 'Farmer Information Form',
     },
     statistics: {
       number: '21,000+',
@@ -534,7 +534,7 @@ export const translations = {
       brand: 'केतकी आधार',
       line2: 'बळीराजाला सामर्थ्य',
       line3: 'आणि नवसंजीवनी',
-      scroll: 'अधिक जाणून घेण्यासाठी खाली स्क्रोल करा',
+      scroll: 'शेतकरी माहिती फॉर्म',
     },
     statistics: {
       number: '२१,०००+',
@@ -997,7 +997,7 @@ export const translations = {
       brand: 'ಕೇತಕಿ ಆಧಾರ',
       line2: 'ಹಸಿರು ಕ್ರಾಂತಿ',
       line3: 'ಮತ್ತು ಸುಸ್ಥಿರ ಭವಿಷ್ಯ',
-      scroll: 'ಹೆಚ್ಚು ತಿಳಿಯಲು ಕೆಳಗೆ ಸ್ಕ್ರೋಲ್ ಮಾಡಿ',
+      scroll: 'ರೈತರ ಮಾಹಿತಿ ಫಾರ್ಮ್',
     },
     statistics: {
       number: '೨೧,೦೦೦+',
@@ -1452,7 +1452,7 @@ export const translations = {
       brand: 'केतकी आधार',
       line2: 'अन्नदाता को संबल',
       line3: 'और खुशहाल कल',
-      scroll: 'और जानने के लिए नीचे स्क्रॉल करें',
+      scroll: 'किसान जानकारी फॉर्म',
     },
     statistics: {
       number: '२१,०००+',

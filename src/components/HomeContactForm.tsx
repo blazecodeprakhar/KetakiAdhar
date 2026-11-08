@@ -130,7 +130,7 @@ const HomeContactForm = () => {
   }
 
   return (
-    <section className="py-20 bg-gradient-to-br from-primary-50 via-white to-secondary-50" id="farmer-form">
+    <section className="py-20 bg-gradient-to-br from-primary-50 via-white to-secondary-50 scroll-mt-20" id="farmer-form">
       <div className="container mx-auto px-4 lg:px-8">
         <div className="max-w-3xl mx-auto">
           {/* Header */}

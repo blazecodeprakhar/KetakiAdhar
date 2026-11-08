@@ -4,8 +4,8 @@ import { useLanguage } from '../context/LanguageContext';
 
 const HeroSection = () => {
   const { t } = useLanguage();
-  const scrollToNext = () => {
-    const element = document.getElementById('statistics');
+  const scrollToFarmerForm = () => {
+    const element = document.getElementById('farmer-form');
     element?.scrollIntoView({ behavior: 'smooth' });
   };
 
@@ -51,13 +51,13 @@ const HeroSection = () => {
           </span>
         </h1>
         
-        <div className="mt-16 animate-bounce-subtle">
+        <div className="mt-14 sm:mt-16 animate-bounce-subtle">
           <button
-            onClick={scrollToNext}
-            className="inline-flex items-center space-x-2 text-white/90 hover:text-white transition-colors group"
+            onClick={scrollToFarmerForm}
+            className="inline-flex items-center space-x-2.5 bg-emerald-600/90 hover:bg-emerald-500 text-white px-7 py-3.5 rounded-full font-semibold shadow-lg hover:shadow-emerald-500/30 transition-all duration-300 transform hover:scale-105 border border-emerald-400/40 backdrop-blur-sm cursor-pointer group"
           >
-            <span className="text-lg font-medium">{t.hero.scroll}</span>
-            <ChevronDown className="w-6 h-6 group-hover:translate-y-1 transition-transform" />
+            <span className="text-base sm:text-lg">{t.hero.scroll}</span>
+            <ChevronDown className="w-5 h-5 group-hover:translate-y-1 transition-transform" />
           </button>
         </div>
       </div>
