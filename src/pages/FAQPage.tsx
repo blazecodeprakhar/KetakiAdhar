@@ -1,3 +1,4 @@
+import { motion, AnimatePresence } from 'framer-motion';
 import React, { useState } from 'react';
 import { ChevronDown, ChevronUp, HelpCircle, Send } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
