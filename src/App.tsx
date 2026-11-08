@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Header from './components/Header';
 import HeroSection from './components/HeroSection';
 import StatisticsSection from './components/StatisticsSection';
@@ -22,6 +22,7 @@ import HomeContactForm from './components/HomeContactForm';
 import Careers from './pages/Careers';
 import VolunteerPage from './pages/VolunteerPage';
 import DonationPage from './pages/DonationPage';
+import NotFoundPage from './pages/NotFoundPage';
 import { LanguageProvider } from './context/LanguageContext';
 import { ToastProvider } from './context/ToastContext';
 import InitialLanguageModal from './components/InitialLanguageModal';
@@ -70,6 +71,17 @@ function App() {
               <Route path="/careers" element={<Careers />} />
               <Route path="/volunteer" element={<VolunteerPage />} />
               <Route path="/donate" element={<DonationPage />} />
+
+              {/* Redirect Aliases */}
+              <Route path="/about" element={<Navigate to="/our-story" replace />} />
+              <Route path="/about-us" element={<Navigate to="/our-story" replace />} />
+              <Route path="/donations" element={<Navigate to="/donate" replace />} />
+              <Route path="/volunteering" element={<Navigate to="/volunteer" replace />} />
+              <Route path="/initiatives" element={<Navigate to="/#initiatives" replace />} />
+              <Route path="/programs" element={<Navigate to="/#initiatives" replace />} />
+
+              {/* 404 Catch-All */}
+              <Route path="*" element={<NotFoundPage />} />
             </Routes>
             </ErrorBoundary>
           </main>

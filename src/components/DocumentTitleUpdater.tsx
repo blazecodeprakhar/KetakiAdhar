@@ -52,7 +52,13 @@ export default function DocumentTitleUpdater() {
   const { language } = useLanguage();
 
   useEffect(() => {
-    const titleObj = pageTitles[pathname] || pageTitles['/'];
+    const notFoundTitles = {
+      en: "404 Page Not Found - Ketaki Adhar",
+      mr: "४०४ पृष्ठ सापडले नाही - केतकी आधार",
+      kn: "೪೦೪ ಪುಟ ಕಂಡುಬಂದಿಲ್ಲ - ಕೇತಕಿ ಆಧಾರ",
+      hi: "४०४ पृष्ठ नहीं मिला - केतकी आधार"
+    };
+    const titleObj = pageTitles[pathname] || notFoundTitles;
     document.title = titleObj[language] || titleObj['en'];
   }, [pathname, language]);
 

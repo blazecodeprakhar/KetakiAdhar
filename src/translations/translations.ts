@@ -508,6 +508,14 @@ export const translations = {
         }
       ],
     },
+        notFound: {
+      badge: '404 Error',
+      title: 'Page Not Found',
+      subtitle: 'The page you are looking for may have been moved, renamed, or does not exist.',
+      homeBtn: 'Back to Homepage',
+      storyBtn: 'Our Story',
+      contactBtn: 'Contact Support',
+    },
     footer: {
       about: "Standing with India's farmers through respect, support, and sustainable solutions. Building a future where agriculture thrives and farmers prosper.",
       quickLinks: 'Quick Links',
@@ -1021,6 +1029,14 @@ export const translations = {
         }
       ],
     },
+        notFound: {
+      badge: '४०४ त्रुटी',
+      title: 'पृष्ठ सापडले नाही',
+      subtitle: 'तुम्ही शोधत असलेले पृष्ठ हलवले गेले असावे किंवा अस्तित्वात नाही.',
+      homeBtn: 'मुख्यपृष्ठावर परत जा',
+      storyBtn: 'आमची कहाणी',
+      contactBtn: 'मदत व संपर्क',
+    },
     footer: {
       about: 'भारतीय शेतकऱ्यांच्या पाठीशी आदर, सहकार्य आणि शाश्वत उपायांसह खंबीरपणे उभे राहणे. शेती आणि शेतकरी समृद्ध करण्याचा आमचा संकल्प.',
       quickLinks: 'महत्त्वाच्या लिंक्स',
@@ -1521,6 +1537,14 @@ export const translations = {
         }
       ],
     },
+        notFound: {
+      badge: '೪೦೪ ದೋಷ',
+      title: 'ಪುಟ ಕಂಡುಬಂದಿಲ್ಲ',
+      subtitle: 'ನೀವು ಹುಡುಕುತ್ತಿರುವ ಪುಟವನ್ನು ತೆಗೆದುಹಾಕಲಾಗಿರಬಹುದು ಅಥವಾ ಲಭ್ಯವಿಲ್ಲ.',
+      homeBtn: 'ಮುಖಪುಟಕ್ಕೆ ಹಿಂತಿರುಗಿ',
+      storyBtn: 'ನಮ್ಮ ಕಥೆ',
+      contactBtn: 'ಸಂಪರ್ಕಿಸಿ',
+    },
     footer: {
       about: 'ಗೌರವ, ಬೆಂಬಲ ಮತ್ತು ಸುಸ್ಥಿರ ಪರಿಹಾರಗಳ ಮೂಲಕ ಭಾರತದ ರೈತರೊಂದಿಗೆ ನಿಲ್ಲುವುದು. ಕೃಷಿ ಮತ್ತು ರೈತರು ಸಮೃದ್ಧವಾಗಿರುವ ಭವಿಷ್ಯವನ್ನು ನಿರ್ಮಿಸುವುದು.',
       quickLinks: 'ತ್ವರಿತ ಲಿಂಕ್‌ಗಳು',
@@ -2020,6 +2044,14 @@ export const translations = {
           badge: 'सशक्तिकरण'
         }
       ],
+    },
+        notFound: {
+      badge: '४०४ त्रुटि',
+      title: 'पृष्ठ नहीं मिला',
+      subtitle: 'आप जो पृष्ठ ढूंढ रहे हैं वह स्थानांतरित कर दिया गया है या मौजूद नहीं है।',
+      homeBtn: 'मुख्य पृष्ठ पर वापस जाएं',
+      storyBtn: 'हमारी कहानी',
+      contactBtn: 'संपर्क करें',
     },
     footer: {
       about: 'सम्मान, सहयोग और टिकाऊ समाधानों के साथ भारत के किसानों के साथ खड़े होना। एक ऐसे भविष्य का निर्माण जहाँ खेती समृद्ध हो और किसान खुशहाल।',
