@@ -25,3 +25,9 @@
   background-size: 400% 400%;
   animation: gradient-move 10s ease infinite;
 }
+
+/* Accessible focus visible outlines */
+:focus-visible {
+  outline: 2px solid #059669;
+  outline-offset: 2px;
+}
