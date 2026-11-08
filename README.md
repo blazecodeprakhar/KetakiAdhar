@@ -1,83 +1,29 @@
-# Ketaki Adhar (केतकी आधार) 🌾
+# Ketaki Adhar (केतकी आधार)
 
-> **Empowering Indian Farmers Through Sustainable Agriculture, Water Security, and Rural Dignity.**
+> Dedicated to empowering Indian farming families through watershed conservation, indigenous seed banks, regenerative organic agriculture, and sustainable livelihoods.
 
-Ketaki Adhar is a modern, responsive web platform dedicated to supporting Indian farming families through non-monetary community patronage, organic agriculture education, indigenous seed preservation, and grassroots relief.
+## Features
+- **4 Regional Languages**: English, Marathi (मराठी), Kannada (ಕನ್ನಡ), and Hindi (हिंदी).
+- **Direct Form Flow**: Smooth scroll anchors to pledge and volunteer forms with real-time progress indicators.
+- **Accessible & Responsive**: WCAG 2.1 AA compliant keyboard navigation, ARIA live regions, skip links, and touch-friendly controls.
+- **PWA & Offline Ready**: Web app manifest, service worker metadata, and network detection.
+- **SEO Optimized**: OpenGraph, canonical links, robots.txt, sitemap.xml, and Schema.org JSON-LD.
 
----
-
-## 🌟 Key Features
-
-* **Multi-Lingual Localization (i18n)**:
-  * Full native translations across 4 Indian languages: **English**, **मराठी (Marathi)**, **ಕನ್ನಡ (Kannada)**, and **हिंदी (Hindi)**.
-  * Instant client-side switching with persistent `localStorage` preference.
-  * Adaptive UI for both desktop dropdowns and mobile drawer navigation.
-
-* **Patronage & Strategic Support Model**:
-  * Pure patronage, program grant, and CSR partnership workflow without price tags, checkout buttons, or transactional commerce.
-  * Four strategic intervention pillars: *Water Security & Watershed Development*, *Indigenous Seeds & Soil Regeneration*, *Farmer Crisis Relief*, and *Women Agricultural Leadership*.
-
-* **Comprehensive Farmer Information Intake**:
-  * Detailed intake form collecting acreages, district, taluka, village, farmer remarks, and optional field photo documentation.
-
-* **Dedicated Community Portals**:
-  * **Our Story (`/our-story`)**: Mission, vision, core values, and field history.
-  * **Volunteer Portal (`/volunteer`)**: Role interest matching, availability scheduling, and registration.
-  * **Careers (`/careers`)**: Purpose-driven career openings, benefits, and resume uploads.
-  * **FAQ (`/faq`)**: Interactive searchable accordions and direct inquiry form.
-  * **Contact (`/contact`)**: Headquarters contact channels, inquiry categorization, and direct email routing to `info@ketakiadhar.in`.
-
----
-
-## 🛠️ Technology Stack
-
-* **Frontend Framework**: [React 18](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/)
-* **Build Tool**: [Vite](https://vitejs.dev/)
-* **Styling**: [Tailwind CSS](https://tailwindcss.com/) with customized agricultural color palettes
-* **Animations**: [Framer Motion](https://www.framer.com/motion/)
-* **Icons**: [Lucide React](https://lucide.dev/)
-* **Routing**: [React Router v6](https://reactrouter.com/)
-
----
-
-## 🚀 Getting Started
-
-### Prerequisites
-
-* [Node.js](https://nodejs.org/) (v18.0.0 or higher recommended)
-* `npm` or `yarn`
-
-### Installation
-
+## Getting Started
 ```bash
-# Clone the repository
-git clone https://github.com/blazecodeprakhar/KetakiAdhar.git
-
-# Navigate into the project directory
-cd KetakiAdhar
-
 # Install dependencies
 npm install
 
-# Start local development server
+# Start Vite development server
 npm run dev
-```
 
-The application will be live at `http://localhost:5173/`.
+# Run TypeScript checks & verification
+npm run verify
 
-### Building for Production
-
-```bash
-# Type check and build optimized bundle
+# Production build
 npm run build
-
-# Preview production build locally
-npm run preview
 ```
 
----
-
-## 📬 Contact & Support
-
-* **Email**: [info@ketakiadhar.in](mailto:info@ketakiadhar.in)
-* **Headquarters**: Mahatma Gandhi Road, Mumbai, India
+## Official Contact
+- **Email**: info@ketakiadhar.in
+- **Website**: [https://ketakiadhar.in](https://ketakiadhar.in)
