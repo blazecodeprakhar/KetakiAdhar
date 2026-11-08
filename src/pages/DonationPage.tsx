@@ -21,6 +21,7 @@ import {
   ArrowDown
 } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
+import { useToast } from '../context/ToastContext';
 
 interface PledgeFormData {
   fullName: string;
@@ -49,6 +50,7 @@ const initialFormData: PledgeFormData = {
 const pillarIcons = [Droplets, Sprout, Heart, Users];
 
 const DonationPage = () => {
+  const { showToast } = useToast();
   const { t } = useLanguage();
   const d = t.donationPage;
   const location = useLocation();
@@ -116,6 +118,7 @@ const DonationPage = () => {
       setPledgeCode(code);
       setIsSubmitting(false);
       setIsSubmitted(true);
+      showToast('Support pledge successfully registered! Thank you for standing with our farmers.', 'success');
     }, 700);
   };
 
