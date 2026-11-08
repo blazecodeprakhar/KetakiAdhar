@@ -1,0 +1,15 @@
+{
+  "name": "Ketaki Adhar - Empowering Farmers",
+  "short_name": "Ketaki Adhar",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#064e3b",
+  "theme_color": "#064e3b",
+  "icons": [
+    {
+      "src": "/vite.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml"
+    }
+  ]
+}
