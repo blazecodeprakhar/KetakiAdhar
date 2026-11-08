@@ -421,6 +421,11 @@ export const translations = {
       successDesc: 'Thank you for stepping forward to volunteer. Our volunteer coordinator will connect with you within 48 hours to share upcoming initiatives and schedule your orientation.',
       registerAnother: 'Register Another Volunteer',
       confidential: 'Your information is held in strict confidence by Ketaki Adhar Foundation.',
+      formGuideBadge: 'Join Our Volunteer Ranks',
+      formGuideTitle: 'Ready to Make a Difference? Fill in Your Details Below',
+      progressLabel: 'Registration Progress',
+      detailsCompleted: 'details filled',
+      readyBadge: 'All Required Details Filled! Ready to Register',
     },
     donationPage: {
       badge: "Stand With India's Farming Community",
@@ -433,6 +438,11 @@ export const translations = {
       pledgeBadge: 'Pledge Your Support',
       pledgeTitle: 'Partner & Support Our Mission',
       pledgeSubtitle: 'Share your intentions and the initiatives you would like to patronize. Our team coordinates customized impact reports and field visits for all patrons.',
+      formGuideBadge: 'Quick Contribution Form',
+      formGuideTitle: 'Ready to Make an Impact? Fill in Your Details Below',
+      progressLabel: 'Pledge Completion',
+      detailsCompleted: 'details filled',
+      readyBadge: 'All Required Details Filled! Ready to Submit',
       contributingAs: 'I am contributing as an:',
       fullName: 'Full Name',
       fullNamePl: 'Enter your full name',
@@ -924,6 +934,11 @@ export const translations = {
       successDesc: 'स्वयंसेवक म्हणून पुढे आल्याबद्दल धन्यवाद. आमचे समन्वयक पुढील ४८ तासांत आपल्याशी संपर्क साधून पुढील मार्गदर्शन करतील.',
       registerAnother: 'आणखी एका स्वयंसेवकाची नोंदणी करा',
       confidential: 'आपली माहिती केतकी आधार फाऊंडेशनकडे पूर्णपणे सुरक्षित आणि गोपनीय ठेवली जाते.',
+      formGuideBadge: 'आमच्यात सामील व्हा',
+      formGuideTitle: 'बदल घडवण्यासाठी तयार आहात? खालील माहिती भरा',
+      progressLabel: 'नोंदणी प्रगती',
+      detailsCompleted: 'तपशील पूर्ण झाले',
+      readyBadge: 'सर्व आवश्यक तपशील पूर्ण! नोंदणीसाठी सज्ज',
     },
     donationPage: {
       badge: 'भारतीय शेतकऱ्यांच्या पाठीशी उभे राहा',
@@ -960,6 +975,51 @@ export const translations = {
       status: 'स्थिती:',
       statusVal: 'संकल्प नोंदवला गेला',
       submitAnother: 'दुसऱ्या सहकार्याची नोंद करा',
+      formGuideBadge: 'सहकार्याचा जलद अर्ज',
+      formGuideTitle: 'बळीराजाला साथ देण्यास तयार आहात? खालील माहिती भरा',
+      progressLabel: 'सहकार्य प्रगती',
+      detailsCompleted: 'तपशील पूर्ण झाले',
+      readyBadge: 'सर्व आवश्यक तपशील पूर्ण! अर्ज सबमिट करण्यास सज्ज',
+      activeField: 'सक्रिय ग्रामीण उपक्रम',
+      selectPillar: 'उपक्रम निवडा',
+      supporterTypes: [
+        { value: 'individual', label: 'वैयक्तिक दाता' },
+        { value: 'csr', label: 'कंपनी / सीएसआर फाऊंडेशन' },
+        { value: 'philanthropic', label: 'धर्मादाय संस्था / सामाजिक संस्था' },
+        { value: 'community', label: 'सहकारी / सामाजिक समूह' },
+      ],
+      contributionOptions: [
+        { id: 'program-grant', label: 'प्रकल्प अनुदान व प्रायोजकत्व' },
+        { id: 'resource-equipment', label: 'शेती औजारे व साधनसामग्री' },
+        { id: 'csr-partnership', label: 'कंपनी सीएसआर भागीदारी' },
+        { id: 'advisory', label: 'तांत्रिक व कृषी मार्गदर्शन' },
+      ],
+      pillars: [
+        {
+          id: 'water-soil',
+          title: 'जलसुरक्षा आणि पाणलोट क्षेत्र विकास',
+          description: 'शेततळी निर्मिती, सिमेंट नाला बांध आणि दुष्काळग्रस्त भागासाठी ठिबक सिंचन सहाय्य.',
+          badge: 'मोठा प्रभाव'
+        },
+        {
+          id: 'seed-organic',
+          title: 'गावरान बियाणे आणि जमीन संवर्धन',
+          description: 'देशी बियाणे बँक, विषमुक्त सेंद्रिय शेती आणि मातीचे आरोग्य सुधारण्याचे उपक्रम.',
+          badge: 'शाश्वत शेती'
+        },
+        {
+          id: 'crisis-relief',
+          title: 'शेतकरी कुटुंब पुनर्वसन व तातडीची मदत',
+          description: 'संकटग्रस्त शेतकरी कुटुंबांना तातडीची वैद्यकीय मदत, शिक्षण सहाय्य व उपजीविका पुनर्वसन.',
+          badge: 'तातडीचे सहाय्य'
+        },
+        {
+          id: 'women-farmers',
+          title: 'महिला शेतकरी नेतृत्व',
+          description: 'महिला बचत गटांना प्रक्रिया उद्योग, आधुनिक अवजारे आणि आर्थिक साक्षरतेचे प्रशिक्षण.',
+          badge: 'महिला सक्षमीकरण'
+        }
+      ],
     },
     footer: {
       about: 'भारतीय शेतकऱ्यांच्या पाठीशी आदर, सहकार्य आणि शाश्वत उपायांसह खंबीरपणे उभे राहणे. शेती आणि शेतकरी समृद्ध करण्याचा आमचा संकल्प.',
@@ -1415,6 +1475,51 @@ export const translations = {
       status: 'ಸ್ಥಿತಿ:',
       statusVal: 'ಸಂಕಲ್ಪ ದೃಢಪಟ್ಟಿದೆ',
       submitAnother: 'ಮತ್ತೊಂದು ಸಂಕಲ್ಪ ಸಲ್ಲಿಸಿ',
+      formGuideBadge: 'ತ್ವರಿತ ಬೆಂಬಲ ಅರ್ಜಿ',
+      formGuideTitle: 'ಬೆಂಬಲ ನೀಡಲು ಸಿದ್ಧರಿದ್ದೀರಾ? ಕೆಳಗೆ ನಿಮ್ಮ ವಿವರಗಳನ್ನು ಭರ್ತಿ ಮಾಡಿ',
+      progressLabel: 'ಬೆಂಬಲ ಪ್ರಗತಿ',
+      detailsCompleted: 'ವಿವರಗಳು ಪೂರ್ಣಗೊಂಡಿವೆ',
+      readyBadge: 'ಎಲ್ಲಾ ಅಗತ್ಯ ವಿವರಗಳು ಪೂರ್ಣವಾಗಿವೆ! ಸಲ್ಲಿಸಲು ಸಿದ್ಧ',
+      activeField: 'ಸಕ್ರಿಯ ಕೃಷಿ ಉಪಕ್ರಮ',
+      selectPillar: 'ಉಪಕ್ರಮವನ್ನು ಆಯ್ಕೆಮಾಡಿ',
+      supporterTypes: [
+        { value: 'individual', label: 'ವೈಯಕ್ತಿಕ ದಾನಿ' },
+        { value: 'csr', label: 'ಕಾರ್ಪೊರೇಟ್ / ಸಿಎಸ್ಆರ್ ಪ್ರತಿಷ್ಠಾನ' },
+        { value: 'philanthropic', label: 'ಧರ್ಮಾರ್ಥ ಟ್ರಸ್ಟ್ / ಸ್ವಯಂಸೇವಾ ಸಂಸ್ಥೆ' },
+        { value: 'community', label: 'ಸಮುದಾಯ / ಸಹಕಾರಿ ಸಂಘ' },
+      ],
+      contributionOptions: [
+        { id: 'program-grant', label: 'ಕಾರ್ಯಕ್ರಮ ಅನುದಾನ ಮತ್ತು ಪ್ರಾಯೋಜಕತ್ವ' },
+        { id: 'resource-equipment', label: 'ಕೃಷಿ ಸಲಕರಣೆಗಳು ಮತ್ತು ಸಂಪನ್ಮೂಲಗಳು' },
+        { id: 'csr-partnership', label: 'ಕಾರ್ಪೊರೇಟ್ ಸಿಎಸ್ಆರ್ ಸಹಯೋಗ' },
+        { id: 'advisory', label: 'ತಾಂತ್ರಿಕ ಮತ್ತು ಕೃಷಿ ಸಲಹಾ ಬೆಂಬಲ' },
+      ],
+      pillars: [
+        {
+          id: 'water-soil',
+          title: 'ಜಲ ಭದ್ರತೆ ಮತ್ತು ಜಲಾನಯನ ಅಭಿವೃದ್ಧಿ',
+          description: 'ಕೃಷಿ ಹೊಂಡಗಳ ನಿರ್ಮಾಣ, ಮಳೆನೀರು ಕೊಯ್ಲು ಚೆಕ್‌ಡ್ಯಾಂ ಮತ್ತು ಹನಿ ನೀರಾವರಿ ಪ್ರೋತ್ಸಾಹ.',
+          badge: 'ಗರಿಷ್ಠ ಪ್ರಭಾವ'
+        },
+        {
+          id: 'seed-organic',
+          title: 'ದೇಸಿ ಬೀಜಗಳು ಮತ್ತು ನೈಸರ್ಗಿಕ ಕೃಷಿ',
+          description: 'ಪಾರಂಪರಿಕ ಬೀಜ ಬ್ಯಾಂಕ್‌ಗಳ ಸ್ಥಾಪನೆ, ರಾಸಾಯನಿಕ ರಹಿತ ಸಾವಯವ ಕೃಷಿ ಉತ್ತೇಜನ.',
+          badge: 'ಸುಸ್ಥಿರತೆ'
+        },
+        {
+          id: 'crisis-relief',
+          title: 'ರೈತ ತುರ್ತು ನೆರವು ಮತ್ತು ಕುಟುಂಬ ಪುನರ್ವಸತಿ',
+          description: 'ಸಂಕಷ್ಟದಲ್ಲಿರುವ ರೈತ ಕುಟುಂಬಗಳಿಗೆ ವೈದ್ಯಕೀಯ ನೆರವು, ಮಕ್ಕಳ ಶಿಕ್ಷಣ ಮತ್ತು ಆರ್ಥಿಕ ಪುನಶ್ಚೇತನ.',
+          badge: 'ತುರ್ತು ಕಾಳಜಿ'
+        },
+        {
+          id: 'women-farmers',
+          title: 'ಮಹಿಳಾ ರೈತ ನಾಯಕತ್ವ',
+          description: 'ಸ್ವಸಹಾಯ ಗುಂಪುಗಳ ಮೂಲಕ ಮಹಿಳಾ ರೈತರಿಗೆ ಸಂಸ್ಕರಣಾ ಉಪಕರಣಗಳು ಮತ್ತು ಆರ್ಥಿಕ ಸಾಕ್ಷರತೆ.',
+          badge: 'ಸಬಲೀಕರಣ'
+        }
+      ],
     },
     footer: {
       about: 'ಗೌರವ, ಬೆಂಬಲ ಮತ್ತು ಸುಸ್ಥಿರ ಪರಿಹಾರಗಳ ಮೂಲಕ ಭಾರತದ ರೈತರೊಂದಿಗೆ ನಿಲ್ಲುವುದು. ಕೃಷಿ ಮತ್ತು ರೈತರು ಸಮೃದ್ಧವಾಗಿರುವ ಭವಿಷ್ಯವನ್ನು ನಿರ್ಮಿಸುವುದು.',
@@ -1870,6 +1975,51 @@ export const translations = {
       status: 'स्थिति:',
       statusVal: 'संकल्प स्वीकृत',
       submitAnother: 'अन्य सहयोग संकल्प दर्ज करें',
+      formGuideBadge: 'त्वरित सहयोग प्रपत्र',
+      formGuideTitle: 'अन्नदाता का संबल बनने को तैयार हैं? नीचे अपना विवरण भरें',
+      progressLabel: 'सहयोग प्रगति',
+      detailsCompleted: 'विवरण पूर्ण हुए',
+      readyBadge: 'सभी आवश्यक विवरण पूर्ण! सबमिट करने के लिए तैयार',
+      activeField: 'सक्रिय क्षेत्रीय पहल',
+      selectPillar: 'एक पहल चुनें',
+      supporterTypes: [
+        { value: 'individual', label: 'व्यक्तिगत सहयोगी' },
+        { value: 'csr', label: 'कॉर्पोरेट / सीएसआर फाउंडेशन' },
+        { value: 'philanthropic', label: 'परमार्थ ट्रस्ट / स्वयंसेवी संस्था' },
+        { value: 'community', label: 'सामुदायिक / सहकारी समूह' },
+      ],
+      contributionOptions: [
+        { id: 'program-grant', label: 'परियोजना अनुदान व प्रायोजन' },
+        { id: 'resource-equipment', label: 'कृषि उपकरण व संसाधन सहयोग' },
+        { id: 'csr-partnership', label: 'कॉर्पोरेट सीएसआर साझेदारी' },
+        { id: 'advisory', label: 'तकनीकी व कृषि परामर्श' },
+      ],
+      pillars: [
+        {
+          id: 'water-soil',
+          title: 'जल सुरक्षा और जलसंभर विकास',
+          description: 'खेत तालाब निर्माण, वर्षा जल संचयन चेक-डैम और सूखाग्रस्त क्षेत्रों में ड्रिप सिंचाई सहयोग।',
+          badge: 'सार्थक प्रभाव'
+        },
+        {
+          id: 'seed-organic',
+          title: 'पारंपरिक बीज और मृदा पुनर्जीवन',
+          description: 'गैर-जीएमओ देशी बीज बैंकों की स्थापना और रसायन मुक्त जैविक खेती को प्रोत्साहन।',
+          badge: 'टिकाऊ कृषि'
+        },
+        {
+          id: 'crisis-relief',
+          title: 'किसान संकट राहत व आजीविका सुरक्षा',
+          description: 'संकटग्रस्त किसान परिवारों को आपातकालीन सहायता, स्वास्थ्य देखभाल और आर्थिक पुनर्वास।',
+          badge: 'त्वरित संबल'
+        },
+        {
+          id: 'women-farmers',
+          title: 'महिला किसान नेतृत्व',
+          description: 'महिला स्वयं सहायता समूहों को कृषि प्रसंस्करण यंत्र, बीज व वित्तीय साक्षरता से सशक्त बनाना।',
+          badge: 'सशक्तिकरण'
+        }
+      ],
     },
     footer: {
       about: 'सम्मान, सहयोग और टिकाऊ समाधानों के साथ भारत के किसानों के साथ खड़े होना। एक ऐसे भविष्य का निर्माण जहाँ खेती समृद्ध हो और किसान खुशहाल।',
