@@ -1,0 +1,7 @@
+/about          /our-story   301!
+/about-us       /our-story   301!
+/donations      /donate      301!
+/volunteering   /volunteer   301!
+/farmer-form    /farmer-registration 301!
+/farmers        /farmer-registration 301!
+/*              /index.html  200

@@ -711,3 +711,4 @@ const FarmerRegistrationPage: React.FC = () => {
 };
 
 export default FarmerRegistrationPage;
+

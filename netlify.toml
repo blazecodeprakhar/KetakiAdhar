@@ -1,0 +1,29 @@
+[[redirects]]
+  from = "/about"
+  to = "/our-story"
+  status = 301
+
+[[redirects]]
+  from = "/about-us"
+  to = "/our-story"
+  status = 301
+
+[[redirects]]
+  from = "/donations"
+  to = "/donate"
+  status = 301
+
+[[redirects]]
+  from = "/volunteering"
+  to = "/volunteer"
+  status = 301
+
+[[redirects]]
+  from = "/farmer-form"
+  to = "/farmer-registration"
+  status = 301
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
