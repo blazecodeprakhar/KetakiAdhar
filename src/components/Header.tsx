@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 import LanguageSelector from './LanguageSelector';
 
@@ -8,7 +8,6 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { t } = useLanguage();
-  const { pathname } = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -62,24 +61,17 @@ const Header = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-6 lg:space-x-8">
-            {navItems.map((item) => {
-              const itemBase = item.href.split('#')[0];
-              const isActive = itemBase ? (itemBase === '/' ? pathname === '/' : pathname.startsWith(itemBase)) : false;
-              return (
-                <Link
-                  key={item.href}
-                  to={item.href}
-                  aria-current={isActive ? 'page' : undefined}
-                  className={`text-sm font-medium transition-colors ${
-                    isActive
-                      ? isScrolled ? 'text-primary-600 font-semibold border-b-2 border-primary-500 pb-0.5' : 'text-white font-semibold border-b-2 border-emerald-400 pb-0.5'
-                      : isScrolled ? 'text-gray-700 hover:text-primary-600' : 'text-white/90 hover:text-white'
-                  }`}
-                >
-                  {item.label}
-                </Link>
-              );
-            })}
+            {navItems.map((item) => (
+              <Link
+                key={item.href}
+                to={item.href}
+                className={`text-sm font-medium transition-colors ${
+                  isScrolled ? 'text-gray-700 hover:text-primary-600' : 'text-white/90 hover:text-white'
+                }`}
+              >
+                {item.label}
+              </Link>
+            ))}
 
             {/* Desktop Language Selector */}
             <LanguageSelector isScrolled={isScrolled} variant="desktop" />
