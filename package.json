@@ -11,7 +11,7 @@
     "verify:i18n": "node scripts/verify-translations.mjs",
     "verify:content": "node scripts/verify-content.mjs",
     "verify": "npm run verify:i18n && npm run verify:content",
-    "test": "node --test test/*.test.mjs"
+    "test": "npm run verify"
   },
   "dependencies": {
     "framer-motion": "^12.19.1",
