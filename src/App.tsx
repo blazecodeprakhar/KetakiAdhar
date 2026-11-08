@@ -22,6 +22,7 @@ import HomeContactForm from './components/HomeContactForm';
 import Careers from './pages/Careers';
 import VolunteerPage from './pages/VolunteerPage';
 import DonationPage from './pages/DonationPage';
+import FarmerRegistrationPage from './pages/FarmerRegistrationPage';
 import NotFoundPage from './pages/NotFoundPage';
 import { LanguageProvider } from './context/LanguageContext';
 import { ToastProvider } from './context/ToastContext';
@@ -71,6 +72,7 @@ function App() {
               <Route path="/careers" element={<Careers />} />
               <Route path="/volunteer" element={<VolunteerPage />} />
               <Route path="/donate" element={<DonationPage />} />
+              <Route path="/farmer-registration" element={<FarmerRegistrationPage />} />
 
               {/* Redirect Aliases */}
               <Route path="/about" element={<Navigate to="/our-story" replace />} />
@@ -79,6 +81,8 @@ function App() {
               <Route path="/volunteering" element={<Navigate to="/volunteer" replace />} />
               <Route path="/initiatives" element={<Navigate to="/#initiatives" replace />} />
               <Route path="/programs" element={<Navigate to="/#initiatives" replace />} />
+              <Route path="/farmer-form" element={<Navigate to="/farmer-registration#farmer-registration-form" replace />} />
+              <Route path="/farmers" element={<Navigate to="/farmer-registration" replace />} />
 
               {/* 404 Catch-All */}
               <Route path="*" element={<NotFoundPage />} />

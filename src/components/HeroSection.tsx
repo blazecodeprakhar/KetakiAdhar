@@ -6,7 +6,11 @@ const HeroSection = () => {
   const { t } = useLanguage();
   const scrollToFarmerForm = () => {
     const element = document.getElementById('farmer-form');
-    element?.scrollIntoView({ behavior: 'smooth' });
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      window.location.href = '/farmer-registration#farmer-registration-form';
+    }
   };
 
   return (

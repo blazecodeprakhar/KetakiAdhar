@@ -24,6 +24,7 @@ const Footer = () => {
   ];
 
   const supportLinks = [
+    { label: t.nav.farmerRegistration, href: '/farmer-registration#farmer-registration-form' },
     { label: f.donate, href: '/donate#pledge-form' },
     { label: f.volunteer, href: '/volunteer#volunteer-form' },
     { label: f.partner, href: '/contact' },

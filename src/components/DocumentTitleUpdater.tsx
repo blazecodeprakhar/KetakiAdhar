@@ -27,6 +27,12 @@ const pageTitles: Record<string, { en: string; mr: string; kn: string; hi: strin
     kn: "ಸ್ವಯಂಸೇವಕರಾಗಿ - ಕೇತಕಿ ಆಧಾರ",
     hi: "स्वयंसेवक बनें - केतकी आधार"
   },
+  '/farmer-registration': {
+    en: "Farmer Registration - Ketaki Adhar",
+    mr: "शेतकरी नोंदणी - केतकी आधार",
+    kn: "ರೈತ ನೋಂದಣಿ - ಕೇತಕಿ ಆಧಾರ",
+    hi: "किसान पंजीकरण - केतकी आधार"
+  },
   '/careers': {
     en: "Careers - Ketaki Adhar",
     mr: "करिअर - केतकी आधार",

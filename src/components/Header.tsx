@@ -34,6 +34,7 @@ const Header = () => {
     { label: t.nav.careers, href: '/careers' },
     { label: t.nav.whyFarmers, href: '/#why-farmers' },
     { label: t.nav.initiatives, href: '/#initiatives' },
+    { label: t.nav.farmerRegistration, href: '/farmer-registration#farmer-registration-form' },
     { label: t.nav.volunteer, href: '/volunteer#volunteer-form' },
     { label: t.nav.faq, href: '/faq' },
     { label: t.nav.contact, href: '/contact' },

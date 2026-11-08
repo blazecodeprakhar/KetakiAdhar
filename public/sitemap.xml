@@ -21,6 +21,11 @@
     <changefreq>weekly</changefreq>
   </url>
   <url>
+    <loc>https://ketakiadhar.in/farmer-registration</loc>
+    <priority>0.95</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
     <loc>https://ketakiadhar.in/careers</loc>
     <priority>0.7</priority>
     <changefreq>monthly</changefreq>

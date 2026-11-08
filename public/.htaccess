@@ -22,6 +22,8 @@
   RewriteRule ^about-us/?$ /our-story [R=301,L]
   RewriteRule ^donations/?$ /donate [R=301,L]
   RewriteRule ^volunteering/?$ /volunteer [R=301,L]
+  RewriteRule ^farmer-form/?$ /farmer-registration [R=301,L]
+  RewriteRule ^farmers/?$ /farmer-registration [R=301,L]
   RewriteRule ^programs/?$ /#initiatives [R=301,NE,L]
   RewriteRule ^initiatives/?$ /#initiatives [R=301,NE,L]
 
