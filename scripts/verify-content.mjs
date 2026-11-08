@@ -28,3 +28,4 @@ if (hasViolations) {
 } else {
   console.log('✅ Content verification passed: zero prices, zero legacy emails in pages.');
 }
+

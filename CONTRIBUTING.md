@@ -17,3 +17,4 @@ Please be respectful, collaborative, and constructive when engaging with our tea
    - Run `npx tsc --noEmit` to ensure zero type errors.
    - Run `npm run build` to verify the production bundle compiles.
 4. **Submit a Pull Request**: Provide a clear description of the problem solved or feature added.
+

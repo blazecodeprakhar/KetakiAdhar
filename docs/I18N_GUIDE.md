@@ -23,3 +23,4 @@ Ketaki Adhar utilizes a custom, lightweight, type-safe React Context localizatio
 | `mr` | Marathi | मराठी | Devanagari |
 | `kn` | Kannada | ಕನ್ನಡ | Kannada |
 | `hi` | Hindi | हिंदी | Devanagari |
+

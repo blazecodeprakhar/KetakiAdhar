@@ -16,3 +16,4 @@ All notable changes to the Ketaki Adhar platform are documented in this file.
 - **Footer Localization**: Fully translated office address, headers, legal links, and copyright text across all languages.
 - **Navigation**: Enhanced `ScrollToTop` to support smooth scrolling to hash anchors across routes (`/#why-farmers`, `/#initiatives`, `/our-story#programs`).
 - **Contact**: Standardized all contact emails to `info@ketakiadhar.in`.
+
