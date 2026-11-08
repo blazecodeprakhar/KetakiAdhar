@@ -74,3 +74,4 @@ ErrorDocument 404 /index.html
 # 7. Disable Directory Browsing
 # ----------------------------------------------------------------------
 Options -Indexes
+

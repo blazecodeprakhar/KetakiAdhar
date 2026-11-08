@@ -6,6 +6,19 @@ import { useToast } from '../context/ToastContext';
 const ContactUs = () => {
   const { t } = useLanguage();
   const c = t.contactPage;
+  const { showToast } = useToast();
+  const [copied, setCopied] = useState(false);
+
+  const handleCopyEmail = () => {
+    try {
+      navigator.clipboard.writeText('info@ketakiadhar.in');
+      setCopied(true);
+      showToast('Email address info@ketakiadhar.in copied to clipboard!', 'info');
+      setTimeout(() => setCopied(false), 2500);
+    } catch (e) {
+      // fallback
+    }
+  };
 
   const [formData, setFormData] = useState({
     fullName: '',
