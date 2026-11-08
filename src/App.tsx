@@ -12,6 +12,7 @@ import CTASection from './components/CTASection';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
 import BackToTop from './components/BackToTop';
+import ErrorBoundary from './components/ErrorBoundary';
 import ContactPage from './pages/ContactPage';
 import AboutPage from './pages/AboutPage';
 import FAQPage from './pages/FAQPage';
@@ -56,6 +57,7 @@ function App() {
           <BackToTop />
           <Header />
           <main id="main-content" className="flex-grow">
+            <ErrorBoundary>
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/our-story" element={<AboutPage />} />
@@ -65,6 +67,7 @@ function App() {
               <Route path="/volunteer" element={<VolunteerPage />} />
               <Route path="/donate" element={<DonationPage />} />
             </Routes>
+            </ErrorBoundary>
           </main>
           <Footer />
         </div>
