@@ -12,6 +12,7 @@ import CTASection from './components/CTASection';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
 import BackToTop from './components/BackToTop';
+import OfflineBanner from './components/OfflineBanner';
 import ErrorBoundary from './components/ErrorBoundary';
 import ContactPage from './pages/ContactPage';
 import AboutPage from './pages/AboutPage';
@@ -46,6 +47,7 @@ function App() {
       <ToastProvider>
       <Router>
         <div className="min-h-screen flex flex-col">
+          <OfflineBanner />
           <a
             href="#main-content"
             className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 z-50 bg-primary-600 text-white px-4 py-2 rounded-lg font-semibold shadow-lg focus:outline-none focus:ring-2 focus:ring-white"
