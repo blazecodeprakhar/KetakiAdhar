@@ -32,10 +32,9 @@
   # If requested resource is not an existing physical file or directory,
   # rewrite the request to index.html for client-side routing.
   # ----------------------------------------------------------------------
-  RewriteRule ^index\.html$ - [L]
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteRule . /index.html [L]
+  RewriteRule ^ index.html [QSA,L]
 </IfModule>
 
 # ----------------------------------------------------------------------
@@ -77,3 +76,4 @@ ErrorDocument 404 /index.html
 # 7. Disable Directory Browsing
 # ----------------------------------------------------------------------
 Options -Indexes
+
