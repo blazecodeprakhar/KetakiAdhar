@@ -12,6 +12,7 @@ import CTASection from './components/CTASection';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
 import BackToTop from './components/BackToTop';
+import DocumentTitleUpdater from './components/DocumentTitleUpdater';
 import OfflineBanner from './components/OfflineBanner';
 import ErrorBoundary from './components/ErrorBoundary';
 import ContactPage from './pages/ContactPage';
@@ -56,6 +57,7 @@ function App() {
           </a>
           <InitialLanguageModal />
           <ScrollToTop />
+          <DocumentTitleUpdater />
           <BackToTop />
           <Header />
           <main id="main-content" className="flex-grow">
