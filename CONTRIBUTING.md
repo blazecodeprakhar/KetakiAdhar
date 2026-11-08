@@ -1,20 +1,16 @@
-# Contributing to Ketaki Adhar
+# Contributing to Ketaki Adhar Foundation
 
-Thank you for your interest in contributing to the Ketaki Adhar platform! Together we are building sustainable digital tools for India's agricultural community.
+Thank you for contributing to Ketaki Adhar's digital initiatives in support of India's farming communities.
 
-## 📋 Code of Conduct
+## Code Standards
+- **TypeScript**: Strict mode enabled. All components and props must be typed.
+- **Tailwind CSS**: Follow mobile-first utility styling.
+- **i18n**: All user-facing strings must be localized across `en`, `mr`, `kn`, and `hi` in `src/translations/translations.ts`.
+- **Accessibility**: Provide ARIA labels, keyboard escape handlers, and visible focus indicators.
 
-Please be respectful, collaborative, and constructive when engaging with our team and community members.
-
-## 🛠️ How to Contribute
-
-1. **Fork the Repository**: Create your feature branch (`git checkout -b feature/amazing-feature`).
-2. **Coding Standards**:
-   - Write clean, type-safe TypeScript code.
-   - Use Tailwind CSS utility classes matching the project theme.
-   - For all text, connect strings to `src/translations/translations.ts` across all 4 supported languages (`en`, `mr`, `kn`, `hi`).
-3. **Verify Locally**:
-   - Run `npx tsc --noEmit` to ensure zero type errors.
-   - Run `npm run build` to verify the production bundle compiles.
-4. **Submit a Pull Request**: Provide a clear description of the problem solved or feature added.
-
+## Commit Guidelines
+Follow the Conventional Commits specification:
+- `feat(scope): ...` for new features
+- `fix(scope): ...` for bug fixes
+- `docs(scope): ...` for documentation
+- `test(scope): ...` for test suites
