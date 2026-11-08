@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Mail, Phone, MapPin, Send, MessageCircle } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
+import { useToast } from '../context/ToastContext';
 
 const ContactUs = () => {
   const { t } = useLanguage();
@@ -44,6 +45,7 @@ const ContactUs = () => {
     e.preventDefault();
     console.log('Contact form submitted:', formData);
     setIsSubmitted(true);
+      showToast('Message sent! Our support desk will reach out within 24 hours.', 'success');
     setFormData({
       fullName: '',
       email: '',
