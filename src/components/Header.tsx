@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ChevronRight, Heart, Sparkles } from 'lucide-react';
+import { ChevronRight, Heart } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
@@ -53,12 +53,7 @@ const Header = () => {
     { label: t.nav.careers, href: '/careers' },
     { label: t.nav.whyFarmers, href: '/#why-farmers' },
     { label: t.nav.initiatives, href: '/#initiatives' },
-    { 
-      label: t.nav.farmerRegistration, 
-      href: '/farmer-registration#farmer-registration-form',
-      isSpecial: true,
-      badge: 'New'
-    },
+    { label: t.nav.farmerRegistration, href: '/farmer-registration#farmer-registration-form' },
     { label: t.nav.volunteer, href: '/volunteer#volunteer-form' },
     { label: t.nav.faq, href: '/faq' },
     { label: t.nav.contact, href: '/contact' },
@@ -118,7 +113,7 @@ const Header = () => {
               {/* Quick mobile language pill */}
               <LanguageSelector isScrolled={isLightHeader} variant="mobile-header" />
 
-              {/* Animated Hamburger / Close Button */}
+              {/* Animated Hamburger / Close Button in Website Primary Theme */}
               <motion.button
                 type="button"
                 whileTap={{ scale: 0.9 }}
@@ -126,10 +121,10 @@ const Header = () => {
                 aria-label={isMobileMenuOpen ? "Close Navigation Menu" : "Open Navigation Menu"}
                 aria-expanded={isMobileMenuOpen}
                 aria-controls="mobile-navigation-menu"
-                className={`w-11 h-11 flex flex-col items-center justify-center rounded-xl transition-all border ${
+                className={`w-11 h-11 flex flex-col items-center justify-center rounded-xl transition-all border shadow-sm ${
                   isLightHeader 
-                    ? 'bg-gray-100 hover:bg-gray-200 border-gray-200 text-gray-800' 
-                    : 'bg-white/15 hover:bg-white/25 border-white/20 text-white backdrop-blur-sm'
+                    ? 'bg-primary-50 hover:bg-primary-100 border-primary-200 text-primary-800' 
+                    : 'bg-gradient-to-br from-primary-600 to-emerald-600 hover:from-primary-500 hover:to-emerald-500 border-primary-400/40 text-white shadow-emerald-950/30'
                 }`}
               >
                 <div className="w-5 h-4 relative flex flex-col justify-between">
@@ -137,21 +132,21 @@ const Header = () => {
                     animate={isMobileMenuOpen ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }}
                     transition={{ duration: 0.25, ease: 'easeInOut' }}
                     className={`w-5 h-0.5 rounded-full block origin-center ${
-                      isLightHeader ? 'bg-gray-800' : 'bg-white'
+                      isLightHeader ? 'bg-primary-800' : 'bg-white'
                     }`}
                   />
                   <motion.span
                     animate={isMobileMenuOpen ? { opacity: 0, scaleX: 0 } : { opacity: 1, scaleX: 1 }}
                     transition={{ duration: 0.2 }}
                     className={`w-5 h-0.5 rounded-full block origin-left ${
-                      isLightHeader ? 'bg-gray-800' : 'bg-white'
+                      isLightHeader ? 'bg-primary-800' : 'bg-white'
                     }`}
                   />
                   <motion.span
                     animate={isMobileMenuOpen ? { rotate: -45, y: -7 } : { rotate: 0, y: 0 }}
                     transition={{ duration: 0.25, ease: 'easeInOut' }}
                     className={`w-5 h-0.5 rounded-full block origin-center ${
-                      isLightHeader ? 'bg-gray-800' : 'bg-white'
+                      isLightHeader ? 'bg-primary-800' : 'bg-white'
                     }`}
                   />
                 </div>
@@ -174,7 +169,7 @@ const Header = () => {
             >
               <div className="container mx-auto px-4 py-3 space-y-4">
                 {/* Easy-to-switch Language Grid for Phone Users */}
-                <div className="bg-gray-50/80 rounded-2xl p-2 border border-gray-100">
+                <div className="bg-primary-50/50 rounded-2xl p-2 border border-primary-100/60">
                   <LanguageSelector variant="mobile-menu" />
                 </div>
 
@@ -195,26 +190,16 @@ const Header = () => {
                           className={`group flex items-center justify-between px-3.5 py-2.5 rounded-xl text-base font-medium transition-all ${
                             isActive
                               ? 'bg-primary-50 text-primary-700 font-semibold'
-                              : item.isSpecial
-                              ? 'bg-emerald-50/70 text-emerald-800 hover:bg-emerald-100/70'
-                              : 'text-gray-800 hover:bg-gray-100/80 hover:text-primary-600'
+                              : 'text-gray-800 hover:bg-primary-50/70 hover:text-primary-600'
                           }`}
                         >
                           <div className="flex items-center space-x-3">
                             <span className={`w-2 h-2 rounded-full transition-transform ${
                               isActive
                                 ? 'bg-primary-600 scale-125'
-                                : item.isSpecial
-                                ? 'bg-emerald-500 scale-110'
                                 : 'bg-gray-300 group-hover:bg-primary-500 group-hover:scale-125'
                             }`} />
                             <span>{item.label}</span>
-                            {item.badge && (
-                              <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-600 text-white shadow-xs">
-                                <Sparkles className="w-2.5 h-2.5 mr-0.5" />
-                                {item.badge}
-                              </span>
-                            )}
                           </div>
                           <ChevronRight className="w-4 h-4 text-gray-400 group-hover:text-primary-600 group-hover:translate-x-0.5 transition-all" />
                         </Link>
@@ -256,7 +241,7 @@ const Header = () => {
             transition={{ duration: 0.25 }}
             onClick={() => setIsMobileMenuOpen(false)}
             aria-hidden="true"
-            className="fixed inset-0 top-20 bg-black/50 backdrop-blur-xs z-40 md:hidden"
+            className="fixed inset-0 top-20 bg-black/50 backdrop-blur-sm z-40 md:hidden"
           />
         )}
       </AnimatePresence>

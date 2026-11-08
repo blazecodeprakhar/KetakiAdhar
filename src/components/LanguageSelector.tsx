@@ -81,15 +81,15 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({
           whileTap={{ scale: 0.94 }}
           onClick={() => setIsOpen(!isOpen)}
           aria-label="Change Language"
-          className={`flex items-center space-x-1.5 py-1.5 px-3 rounded-full text-xs font-semibold border transition-all ${
+          className={`flex items-center space-x-1.5 py-2 px-3 rounded-xl text-xs font-semibold border transition-all ${
             isScrolled || isOpen
-              ? 'bg-gray-100 text-gray-800 border-gray-300 hover:bg-gray-200 shadow-xs'
-              : 'bg-white/20 text-white border-white/30 backdrop-blur-sm hover:bg-white/30'
+              ? 'bg-primary-50 text-primary-900 border-primary-200 hover:bg-primary-100 shadow-sm'
+              : 'bg-primary-950/50 hover:bg-primary-900/60 text-white border-primary-500/40 backdrop-blur-md shadow-sm'
           }`}
         >
-          <Globe className={`w-3.5 h-3.5 ${isScrolled || isOpen ? 'text-primary-600' : 'text-white'}`} />
+          <Globe className="w-3.5 h-3.5 text-primary-400" />
           <span>{currentLang.nativeName}</span>
-          <ChevronDown className={`w-3 h-3 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+          <ChevronDown className={`w-3 h-3 text-primary-300 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
         </motion.button>
 
         {isOpen && (
