@@ -19,6 +19,7 @@ import {
   FileText
 } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
+import { useToast } from '../context/ToastContext';
 
 interface VolunteerFormData {
   fullName: string;
@@ -41,6 +42,7 @@ const initialFormData: VolunteerFormData = {
 };
 
 const VolunteerPage = () => {
+  const { showToast } = useToast();
   const { t } = useLanguage();
   const v = t.volunteerPage;
   const location = useLocation();
@@ -97,6 +99,7 @@ const VolunteerPage = () => {
       console.log('Volunteer registration submitted:', formData);
       setIsSubmitting(false);
       setIsSubmitted(true);
+      showToast('Volunteer registration received! Our team will contact you shortly.', 'success');
       setFormData(initialFormData);
     }, 700);
   };
