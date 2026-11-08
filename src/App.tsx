@@ -19,6 +19,7 @@ import Careers from './pages/Careers';
 import VolunteerPage from './pages/VolunteerPage';
 import DonationPage from './pages/DonationPage';
 import { LanguageProvider } from './context/LanguageContext';
+import { ToastProvider } from './context/ToastContext';
 import InitialLanguageModal from './components/InitialLanguageModal';
 
 const Home = () => (
@@ -40,6 +41,7 @@ const Home = () => (
 function App() {
   return (
     <LanguageProvider>
+      <ToastProvider>
       <Router>
         <div className="min-h-screen flex flex-col">
           <InitialLanguageModal />
@@ -59,6 +61,7 @@ function App() {
           <Footer />
         </div>
       </Router>
+      </ToastProvider>
     </LanguageProvider>
   );
 }
