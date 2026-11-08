@@ -11,6 +11,7 @@ import SupportArea from './components/SupportArea';
 import CTASection from './components/CTASection';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
+import BackToTop from './components/BackToTop';
 import ContactPage from './pages/ContactPage';
 import AboutPage from './pages/AboutPage';
 import FAQPage from './pages/FAQPage';
@@ -52,6 +53,7 @@ function App() {
           </a>
           <InitialLanguageModal />
           <ScrollToTop />
+          <BackToTop />
           <Header />
           <main id="main-content" className="flex-grow">
             <Routes>
