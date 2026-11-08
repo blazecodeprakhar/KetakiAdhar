@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { Send, CheckCircle, User, Phone, MapPin, Upload, X, FileText, Image as ImageIcon, Sprout } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
+import { useToast } from '../context/ToastContext';
 
 interface FarmerFormData {
   fullName: string;
@@ -25,6 +26,7 @@ const initialFormData: FarmerFormData = {
 };
 
 const HomeContactForm = () => {
+  const { showToast } = useToast();
   const { t } = useLanguage();
   const f = t.farmerForm;
   const [formData, setFormData] = useState<FarmerFormData>(initialFormData);
@@ -75,6 +77,7 @@ const HomeContactForm = () => {
       });
       setIsSubmitting(false);
       setIsSubmitted(true);
+      showToast('Farmer assistance request submitted successfully!', 'success');
 
       setTimeout(() => {
         setIsSubmitted(false);
