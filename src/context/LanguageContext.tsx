@@ -23,8 +23,13 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     return 'en';
   });
 
+  React.useEffect(() => {
+    document.documentElement.lang = language;
+  }, [language]);
+
   const setLanguage = (lang: Language) => {
     setLanguageState(lang);
+    document.documentElement.lang = lang;
     try {
       localStorage.setItem('ketaki_language', lang);
     } catch (e) {
