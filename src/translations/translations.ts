@@ -20,6 +20,7 @@ export const translations = {
       careers: 'Career',
       whyFarmers: 'Why Farmers Matter',
       initiatives: 'Our Initiatives',
+      farmerRegistration: 'Farmer Registration',
       volunteer: 'Be a Volunteer',
       faq: 'FAQ',
       contact: 'Contact Us',
@@ -508,7 +509,55 @@ export const translations = {
         }
       ],
     },
-        notFound: {
+            farmerRegistrationPage: {
+      badge: 'Direct Rural Outreach & Support',
+      heroTitle1: 'Stand Strong With',
+      heroTitle2: 'Farmer Registration & Welfare',
+      heroSubtitle: 'Register your agricultural land and family details to access free soil testing, indigenous seeds, watershed farm pond assistance, and direct field visits from Ketaki Adhar Foundation.',
+      ctaBtn: 'Register Farmer Now',
+      benefitsBadge: 'Welfare Interventions',
+      benefitsTitle: 'Services for Registered Farmers',
+      benefitsSubtitle: 'We empower smallholders with science-backed organic methods, water independence, and emergency relief.',
+      benefits: [
+        {
+          title: 'Soil Health & Watershed Projects',
+          description: 'Free scientific laboratory soil testing, farm pond construction, and subsidized drip irrigation kits.'
+        },
+        {
+          title: 'Heritage Non-GMO Seeds',
+          description: 'Access to indigenous drought-resilient heirloom seed banks and bio-fertilizer training.'
+        },
+        {
+          title: 'Family Health & Crisis Relief',
+          description: 'Direct medical relief camps, emergency financial rehabilitation, and children educational aid.'
+        },
+        {
+          title: 'Field Agronomy & Fair Markets',
+          description: 'Continuous village visits by agronomy specialists and direct market linkages eliminating middlemen.'
+        }
+      ],
+      formBadge: 'Farmer Enrollment',
+      formTitle: 'Farmer Information & Assistance Form',
+      formSubtitle: 'Please provide accurate land and contact information. Our field coordinators will verify your case and visit your village.',
+      formGuideBadge: 'Farmer Welfare Portal',
+      formGuideTitle: 'Complete your registration details below for direct assistance',
+      progressLabel: 'Registration Progress',
+      detailsCompleted: 'details completed',
+      readyBadge: 'All Required Details Filled! Ready to Register',
+      submitBtn: 'Submit Farmer Registration',
+      submittingBtn: 'Submitting Farmer Record...',
+      successTitle: 'Farmer Successfully Registered!',
+      successDesc: 'Thank you for enrolling with Ketaki Adhar Foundation. Our agricultural coordinator and local field team will connect directly with you to schedule a farm visit.',
+      ref: 'Enrollment Code:',
+      farmerName: 'Farmer Name:',
+      village: 'Village / District:',
+      landSize: 'Land Holding:',
+      status: 'Status:',
+      statusVal: 'Active Case - Queued for Field Review',
+      registerAnother: 'Register Another Farmer',
+      confidential: 'Farmer information is held with utmost dignity and strictly for welfare support by Ketaki Adhar Foundation.'
+    },
+    notFound: {
       badge: '404 Error',
       title: 'Page Not Found',
       subtitle: 'The page you are looking for may have been moved, renamed, or does not exist.',
@@ -541,6 +590,7 @@ export const translations = {
       careers: 'कारकीर्द',
       whyFarmers: 'शेतकरी का महत्त्वाचे',
       initiatives: 'आमचे उपक्रम',
+      farmerRegistration: 'शेतकरी नोंदणी',
       volunteer: 'स्वयंसेवक व्हा',
       faq: 'वारंवार विचारले जाणारे प्रश्न',
       contact: 'संपर्क साधा',
@@ -1029,7 +1079,55 @@ export const translations = {
         }
       ],
     },
-        notFound: {
+            farmerRegistrationPage: {
+      badge: 'थेट शेतकरी संपर्क व कल्याण',
+      heroTitle1: 'बळीराजाच्या सन्मानार्थ',
+      heroTitle2: 'शेतकरी नोंदणी व कल्याण योजना',
+      heroSubtitle: 'मोफत माती परीक्षण, देशी गावरान बियाणे, शेततळे निर्मिती आणि थेट कृषी तज्ज्ञांच्या मार्गदर्शनाचा लाभ घेण्यासाठी आपली शेतकरी नोंदणी पूर्ण करा.',
+      ctaBtn: 'शेतकरी नोंदणी करा',
+      benefitsBadge: 'शेतकरी सहाय्य सेवा',
+      benefitsTitle: 'नोंदणीकृत शेतकऱ्यांना मिळणारे लाभ',
+      benefitsSubtitle: 'शाश्वत सेंद्रिय शेती, जलसुरक्षा आणि संकटकालीन मदतीद्वारे शेतकऱ्यांचे जीवन समृद्ध करण्याचा आमचा संकल्प.',
+      benefits: [
+        {
+          title: 'माती आरोग्य व जलसंधारण',
+          description: 'मोफत प्रयोगशाळा माती परीक्षण, शेततळी खोदकाम आणि ठिबक सिंचन सहाय्य.'
+        },
+        {
+          title: 'गावरान देशी बियाणे बँक',
+          description: 'दुष्काळात तग धरणाऱ्या देशी बियाणांचे वाटप व सेंद्रिय खत निर्मिती प्रशिक्षण.'
+        },
+        {
+          title: 'कुटुंब आरोग्य व संकट निवारण',
+          description: 'शेतकरी कुटुंबांसाठी मोफत आरोग्य शिबिरे, तातडीची आर्थिक मदत व मुलांचे शिक्षण सहाय्य.'
+        },
+        {
+          title: 'शेतकरी थेट बाजारपेठ',
+          description: 'कृषी शास्त्रज्ञांच्या नियमित शिवार फेऱ्या आणि दलालांशिवाय थेट बाजारात शेतमाल विक्री व्यवस्था.'
+        }
+      ],
+      formBadge: 'शेतकरी प्रवेश',
+      formTitle: 'शेतकरी माहिती व सहाय्य अर्ज',
+      formSubtitle: 'कृपया आपली जमीन आणि संपर्काची अचूक माहिती द्या. आमचे क्षेत्रीय पथक पडताळणी करून आपल्या शिवारात भेट देईल.',
+      formGuideBadge: 'शेतकरी कल्याण अर्ज',
+      formGuideTitle: 'थेट मदतीसाठी खालील शेती व संपर्क तपशील भरा',
+      progressLabel: 'नोंदणी प्रगती',
+      detailsCompleted: 'तपशील पूर्ण झाले',
+      readyBadge: 'सर्व तपशील पूर्ण! नोंदणीसाठी सज्ज',
+      submitBtn: 'शेतकरी माहिती सबमिट करा',
+      submittingBtn: 'नोंदणी होत आहे...',
+      successTitle: 'शेतकरी नोंदणी यशस्वी झाली!',
+      successDesc: 'केतकी आधार फाऊंडेशनशी जोडल्याबद्दल धन्यवाद. आमचे कृषी समन्वयक व क्षेत्रीय पथक लवकरच आपल्याशी संपर्क साधून शिवार भेटीचे नियोजन करेल.',
+      ref: 'नोंदणी क्रमांक:',
+      farmerName: 'शेतकऱ्याचे नाव:',
+      village: 'गाव / जिल्हा:',
+      landSize: 'जमीन क्षेत्र:',
+      status: 'स्थिती:',
+      statusVal: 'सक्रिय नोंदणी - शिवार भेटीसाठी वर्ग',
+      registerAnother: 'दुसऱ्या शेतकऱ्याची नोंदणी करा',
+      confidential: 'शेतकऱ्यांची माहिती केतकी आधार फाऊंडेशनकडे अत्यंत सुरक्षित आणि सन्मानाने ठेवली जाते.'
+    },
+    notFound: {
       badge: '४०४ त्रुटी',
       title: 'पृष्ठ सापडले नाही',
       subtitle: 'तुम्ही शोधत असलेले पृष्ठ हलवले गेले असावे किंवा अस्तित्वात नाही.',
@@ -1062,6 +1160,7 @@ export const translations = {
       careers: 'ಉದ್ಯೋಗಾವಕಾಶ',
       whyFarmers: 'ರೈತರ ಮಹತ್ವ',
       initiatives: 'ನಮ್ಮ ಉಪಕ್ರಮಗಳು',
+      farmerRegistration: 'ರೈತ ನೋಂದಣಿ',
       volunteer: 'ಸ್ವಯಂಸೇವಕರಾಗಿ',
       faq: 'ಪ್ರಶ್ನೋತ್ತರ',
       contact: 'ಸಂಪರ್ಕಿಸಿ',
@@ -1537,7 +1636,55 @@ export const translations = {
         }
       ],
     },
-        notFound: {
+            farmerRegistrationPage: {
+      badge: 'ನೇರ ಗ್ರಾಮೀಣ ಸಂಪರ್ಕ ಮತ್ತು ನೆರವು',
+      heroTitle1: 'ರೈತರ ಸಬಲೀಕರಣಕ್ಕಾಗಿ',
+      heroTitle2: 'ರೈತ ನೋಂದಣಿ ಮತ್ತು ಕಲ್ಯಾಣ ಯೋಜನೆ',
+      heroSubtitle: 'ಉಚಿತ ಮಣ್ಣು ಪರೀಕ್ಷೆ, ದೇಸಿ ಬೀಜಗಳು, ಕೃಷಿ ಹೊಂಡ ನಿರ್ಮಾಣ ಮತ್ತು ಕೃಷಿ ತಜ್ಞರ ನೇರ ಮಾರ್ಗದರ್ಶನ ಪಡೆಯಲು ನಿಮ್ಮ ರೈತ ನೋಂದಣಿಯನ್ನು ಪೂರ್ಣಗೊಳಿಸಿ.',
+      ctaBtn: 'ರೈತ ನೋಂದಣಿ ಮಾಡಿ',
+      benefitsBadge: 'ರೈತ ಕಲ್ಯಾಣ ಸೇವೆಗಳು',
+      benefitsTitle: 'ನೋಂದಾಯಿತ ರೈತರಿಗೆ ದೊರೆಯುವ ಸೌಲಭ್ಯಗಳು',
+      benefitsSubtitle: 'ಸುಸ್ಥಿರ ಕೃಷಿ ಮತ್ತು ಜಲ ಭದ್ರತೆಯ ಮೂಲಕ ರೈತ ಕುಟುಂಬಗಳನ್ನು ಸ್ವಾವಲಂಬಿ ಮಾಡುವುದು ನಮ್ಮ ಗುರಿ.',
+      benefits: [
+        {
+          title: 'ಮಣ್ಣಿನ ಆರೋಗ್ಯ ಮತ್ತು ಜಲ ಭದ್ರತೆ',
+          description: 'ಉಚಿತ ಪ್ರಯೋಗಾಲಯ ಮಣ್ಣು ಪರೀಕ್ಷೆ, ಕೃಷಿ ಹೊಂಡ ನಿರ್ಮಾಣ ಮತ್ತು ಹನಿ ನೀರಾವರಿ ಪ್ರೋತ್ಸಾಹ.'
+        },
+        {
+          title: 'ಪಾರಂಪರಿಕ ದೇಸಿ ಬೀಜಗಳು',
+          description: 'ಬರ ನಿರೋಧಕ ದೇಸಿ ಬೀಜ ಬ್ಯಾಂಕ್‌ಗಳ ಸೌಲಭ್ಯ ಮತ್ತು ಸಾವಯವ ಗೊಬ್ಬರ ತರಬೇತಿ.'
+        },
+        {
+          title: 'ಆರೋಗ್ಯ ಶಿಬಿರ ಮತ್ತು ತುರ್ತು ನೆರವು',
+          description: 'ರೈತ ಕುಟುಂಬಗಳಿಗೆ ಉಚಿತ ವೈದ್ಯಕೀಯ ಚಿಕಿತ್ಸೆ ಮತ್ತು ತುರ್ತು ಆರ್ಥಿಕ ನೆರವು.'
+        },
+        {
+          title: 'ಕೃಷಿ ತಜ್ಞರ ಭೇಟಿ ಮತ್ತು ಮಾರುಕಟ್ಟೆ',
+          description: 'ಕೃಷಿ ತಜ್ಞರ ನೇರ ಹೊಲ ಭೇಟಿ ಮತ್ತು ಮಧ್ಯವರ್ತಿಗಳಿಲ್ಲದೆ ನ್ಯಾಯಯುತ ಮಾರುಕಟ್ಟೆ ಸಂಪರ್ಕ.'
+        }
+      ],
+      formBadge: 'ರೈತರ ನೋಂದಣಿ',
+      formTitle: 'ರೈತರ ಮಾಹಿತಿ ಮತ್ತು ನೆರವು ಅರ್ಜಿ',
+      formSubtitle: 'ದಯವಿಟ್ಟು ನಿಮ್ಮ ಭೂಮಿ ಮತ್ತು ಸಂಪರ್ಕ ವಿವರಗಳನ್ನು ಭರ್ತಿ ಮಾಡಿ. ನಮ್ಮ ತಂಡವು ಶೀಘ್ರದಲ್ಲೇ ನಿಮ್ಮ ಊರಿಗೆ ಭೇಟಿ ನೀಡಲಿದೆ.',
+      formGuideBadge: 'ರೈತ ಕಲ್ಯಾಣ ಅರ್ಜಿ',
+      formGuideTitle: 'ನೇರ ಸಹಾಯಕ್ಕಾಗಿ ಕೆಳಗೆ ನಿಮ್ಮ ವಿವರಗಳನ್ನು ಭರ್ತಿ ಮಾಡಿ',
+      progressLabel: 'ನೋಂದಣಿ ಪ್ರಗತಿ',
+      detailsCompleted: 'ವಿವರಗಳು ಪೂರ್ಣಗೊಂಡಿವೆ',
+      readyBadge: 'ಎಲ್ಲಾ ವಿವರಗಳು ಭರ್ತಿಯಾಗಿವೆ! ನೋಂದಣಿಗೆ ಸಿದ್ಧ',
+      submitBtn: 'ರೈತ ವಿವರಗಳನ್ನು ಸಲ್ಲಿಸಿ',
+      submittingBtn: 'ಸಲ್ಲಿಸಲಾಗುತ್ತಿದೆ...',
+      successTitle: 'ರೈತ ನೋಂದಣಿ ಯಶಸ್ವಿಯಾಗಿದೆ!',
+      successDesc: 'ಕೇತಕಿ ಆಧಾರ ಫೌಂಡೇಶನ್ ಜೊತೆ ನೋಂದಾಯಿಸಿದ್ದಕ್ಕಾಗಿ ಧನ್ಯವಾದಗಳು. ನಮ್ಮ ಕೃಷಿ ಸಂಯೋಜಕರು ಶೀಘ್ರದಲ್ಲೇ ನಿಮ್ಮನ್ನು ಸಂಪರ್ಕಿಸಲಿದ್ದಾರೆ.',
+      ref: 'ನೋಂದಣಿ ಸಂಖ್ಯೆ:',
+      farmerName: 'ರೈತರ ಹೆಸರು:',
+      village: 'ಗ್ರಾಮ / ಜಿಲ್ಲೆ:',
+      landSize: 'ಜಮೀನಿನ ವಿಸ್ತೀರ್ಣ:',
+      status: 'ಸ್ಥಿತಿ:',
+      statusVal: 'ಸಕ್ರಿಯ ಪ್ರಕರಣ - ಪರಿಶೀಲನೆಯಲ್ಲಿದೆ',
+      registerAnother: 'ಮತ್ತೊಬ್ಬ ರೈತರನ್ನು ನೋಂದಾಯಿಸಿ',
+      confidential: 'ರೈತರ ಮಾಹಿತಿಯನ್ನು ಕೇತಕಿ ಆಧಾರ ಫೌಂಡೇಶನ್ ಗೌಪ್ಯವಾಗಿ ರಕ್ಷಿಸುತ್ತದೆ.'
+    },
+    notFound: {
       badge: '೪೦೪ ದೋಷ',
       title: 'ಪುಟ ಕಂಡುಬಂದಿಲ್ಲ',
       subtitle: 'ನೀವು ಹುಡುಕುತ್ತಿರುವ ಪುಟವನ್ನು ತೆಗೆದುಹಾಕಲಾಗಿರಬಹುದು ಅಥವಾ ಲಭ್ಯವಿಲ್ಲ.',
@@ -1570,6 +1717,7 @@ export const translations = {
       careers: 'करियर',
       whyFarmers: 'किसान क्यों महत्वपूर्ण हैं',
       initiatives: 'हमारी पहल',
+      farmerRegistration: 'किसान पंजीकरण',
       volunteer: 'स्वयंसेवक बनें',
       faq: 'अक्सर पूछे जाने वाले सवाल',
       contact: 'संपर्क करें',
@@ -2045,7 +2193,55 @@ export const translations = {
         }
       ],
     },
-        notFound: {
+            farmerRegistrationPage: {
+      badge: 'प्रत्यक्ष ग्रामीण संपर्क व संबल',
+      heroTitle1: 'अन्नदाता के सम्मान में',
+      heroTitle2: 'किसान पंजीकरण व कल्याण योजना',
+      heroSubtitle: 'मुफ्त मृदा परीक्षण, देशी बीज, खेत तालाब निर्माण और कृषि वैज्ञानिकों के प्रत्यक्ष मार्गदर्शन का लाभ उठाने के लिए अपना किसान पंजीकरण पूर्ण करें।',
+      ctaBtn: 'किसान पंजीकरण करें',
+      benefitsBadge: 'किसान कल्याण सेवाएं',
+      benefitsTitle: 'पंजीकृत किसानों को मिलने वाली सुविधाएं',
+      benefitsSubtitle: 'टिकाऊ जैविक खेती, जल सुरक्षा और संकटकालीन संबल द्वारा किसान परिवारों को आत्मनिर्भर बनाना हमारा संकल्प है।',
+      benefits: [
+        {
+          title: 'मृदा स्वास्थ्य व जलसंभर परियोजनाएं',
+          description: 'मुफ्त प्रयोगशाला मृदा परीक्षण, खेत तालाब निर्माण और ड्रिप सिंचाई सहायता।'
+        },
+        {
+          title: 'पारंपरिक गैर-जीएमओ देशी बीज',
+          description: 'सूखा-प्रतिरोधी देशी बीज बैंकों की सुविधा और रसायन मुक्त जैविक खाद प्रशिक्षण।'
+        },
+        {
+          title: 'परिवार स्वास्थ्य व आपातकालीन संबल',
+          description: 'मुफ्त स्वास्थ्य जांच शिविर, संकटकालीन आर्थिक सहायता और बच्चों की शिक्षा में सहयोग।'
+        },
+        {
+          title: 'क्षेत्रीय कृषि परामर्श व उचित बाजार',
+          description: 'कृषि वैज्ञानिकों की नियमित खेत यात्राएं और बिचौलियों के बिना सीधे बाजार तक पहुंच।'
+        }
+      ],
+      formBadge: 'किसान दाखिला',
+      formTitle: 'किसान जानकारी एवं सहायता प्रपत्र',
+      formSubtitle: 'कृपया अपनी कृषि भूमि और संपर्क का सही विवरण भरें। हमारी क्षेत्रीय टीम सत्यापन कर आपके गांव में संपर्क करेगी।',
+      formGuideBadge: 'किसान कल्याण प्रपत्र',
+      formGuideTitle: 'प्रत्यक्ष सहायता के लिए नीचे अपना कृषि एवं संपर्क विवरण भरें',
+      progressLabel: 'पंजीकरण प्रगति',
+      detailsCompleted: 'विवरण पूर्ण हुए',
+      readyBadge: 'सभी आवश्यक विवरण पूर्ण! पंजीकरण के लिए तैयार',
+      submitBtn: 'किसान जानकारी सबमिट करें',
+      submittingBtn: 'पंजीकरण दर्ज हो रहा है...',
+      successTitle: 'किसान पंजीकरण सफलतापूर्वक दर्ज!',
+      successDesc: 'केतकी आधार फाउंडेशन से जुड़ने के लिए धन्यवाद। हमारे कृषि समन्वयक और क्षेत्रीय दल जल्द ही आपसे संपर्क कर खेत का दौरा करेंगे।',
+      ref: 'पंजीकरण संख्या:',
+      farmerName: 'किसान का नाम:',
+      village: 'गांव / जिला:',
+      landSize: 'भूमि क्षेत्र:',
+      status: 'स्थिति:',
+      statusVal: 'सक्रिय प्रविष्टि - क्षेत्रीय सत्यापन हेतु कतारबद्ध',
+      registerAnother: 'अन्य किसान का पंजीकरण करें',
+      confidential: 'किसानों की जानकारी केतकी आधार फाउंडेशन द्वारा पूरी तरह गोपनीय व सम्मानपूर्वक सुरक्षित रखी जाती है।'
+    },
+    notFound: {
       badge: '४०४ त्रुटि',
       title: 'पृष्ठ नहीं मिला',
       subtitle: 'आप जो पृष्ठ ढूंढ रहे हैं वह स्थानांतरित कर दिया गया है या मौजूद नहीं है।',
