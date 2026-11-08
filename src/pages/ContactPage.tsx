@@ -27,7 +27,15 @@ const ContactUs = () => {
     {
       icon: Mail,
       title: c.emailTitle,
-      details: ["info@ketakiadhar.in", c.emailResponse],
+      details: ["info@ketakiadhar.in
+                  <button
+                    type="button"
+                    onClick={handleCopyEmail}
+                    className="ml-2 text-xs bg-primary-100 hover:bg-primary-200 text-primary-800 px-2 py-0.5 rounded-md font-medium transition-colors cursor-pointer"
+                    title="Copy email address"
+                  >
+                    {copied ? 'Copied!' : 'Copy'}
+                  </button>", c.emailResponse],
       color: "from-accent-500 to-accent-600"
     }
   ];
