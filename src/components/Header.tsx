@@ -93,7 +93,7 @@ const Header = () => {
             {/* Mobile menu toggle */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              aria-label="Toggle Navigation Menu"
+              aria-label="Toggle Navigation Menu" aria-expanded={isMobileMenuOpen} aria-controls="mobile-navigation-menu"
               className={`p-1.5 rounded-lg focus:outline-none transition-colors ${
                 isScrolled || isMobileMenuOpen ? 'text-gray-700 hover:text-primary-500' : 'text-white hover:text-white'
               }`}
@@ -109,7 +109,7 @@ const Header = () => {
 
         {/* Mobile menu drawer */}
         <div
-          className={`md:hidden transition-all duration-300 ease-in-out ${
+          id="mobile-navigation-menu" className={`md:hidden transition-all duration-300 ease-in-out ${
             isMobileMenuOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0 overflow-hidden pointer-events-none'
           }`}
         >
