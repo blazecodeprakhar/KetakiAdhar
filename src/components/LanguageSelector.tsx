@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Globe, Check, ChevronDown } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
 import { Language } from '../translations/translations';
 
@@ -36,8 +37,8 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({
   // Mobile menu grid version (rendered inside the mobile slide-down menu)
   if (variant === 'mobile-menu') {
     return (
-      <div className="pt-2 pb-3 px-3">
-        <div className="flex items-center space-x-2 text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">
+      <div className="p-1">
+        <div className="flex items-center space-x-2 text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2.5 px-1">
           <Globe className="w-4 h-4 text-primary-600" />
           <span>Select Language / भाषा निवडा</span>
         </div>
@@ -45,24 +46,25 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({
           {languages.map((lang) => {
             const isSelected = lang.code === language;
             return (
-              <button
+              <motion.button
                 key={lang.code}
                 type="button"
+                whileTap={{ scale: 0.96 }}
                 onClick={() => handleSelect(lang.code)}
                 className={`py-2.5 px-3 rounded-xl text-left flex items-center justify-between text-sm font-medium transition-all ${
                   isSelected
-                    ? 'bg-primary-500 text-white shadow-sm'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    ? 'bg-gradient-to-r from-primary-600 to-primary-500 text-white shadow-sm ring-2 ring-primary-500/30'
+                    : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200'
                 }`}
               >
                 <div>
-                  <div className="font-semibold">{lang.nativeName}</div>
+                  <div className="font-semibold leading-tight">{lang.nativeName}</div>
                   <div className={`text-xs ${isSelected ? 'text-primary-100' : 'text-gray-500'}`}>
                     {lang.name}
                   </div>
                 </div>
-                {isSelected && <Check className="w-4 h-4 text-white" />}
-              </button>
+                {isSelected && <Check className="w-4 h-4 text-white shrink-0 ml-1" />}
+              </motion.button>
             );
           })}
         </div>
@@ -74,20 +76,21 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({
   if (variant === 'mobile-header') {
     return (
       <div className="relative md:hidden" ref={dropdownRef}>
-        <button
+        <motion.button
           type="button"
+          whileTap={{ scale: 0.94 }}
           onClick={() => setIsOpen(!isOpen)}
           aria-label="Change Language"
-          className={`flex items-center space-x-1 py-1.5 px-2.5 rounded-full text-xs font-semibold border transition-all ${
+          className={`flex items-center space-x-1.5 py-1.5 px-3 rounded-full text-xs font-semibold border transition-all ${
             isScrolled || isOpen
-              ? 'bg-gray-100 text-gray-800 border-gray-300'
-              : 'bg-white/20 text-white border-white/30 backdrop-blur-sm'
+              ? 'bg-gray-100 text-gray-800 border-gray-300 hover:bg-gray-200 shadow-xs'
+              : 'bg-white/20 text-white border-white/30 backdrop-blur-sm hover:bg-white/30'
           }`}
         >
-          <Globe className="w-3.5 h-3.5" />
+          <Globe className={`w-3.5 h-3.5 ${isScrolled || isOpen ? 'text-primary-600' : 'text-white'}`} />
           <span>{currentLang.nativeName}</span>
           <ChevronDown className={`w-3 h-3 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
-        </button>
+        </motion.button>
 
         {isOpen && (
           <div className="absolute right-0 mt-2 w-48 bg-white rounded-2xl shadow-2xl border border-gray-100 py-2 z-50 animate-fade-in">

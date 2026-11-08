@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { ChevronRight, Heart, Sparkles } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
 import LanguageSelector from './LanguageSelector';
 
@@ -8,6 +9,7 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { t } = useLanguage();
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,7 +17,7 @@ const Header = () => {
       setIsScrolled(scrollTop > 50);
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
@@ -29,118 +31,236 @@ const Header = () => {
     };
   }, []);
 
+  // Close mobile menu on route change
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [location.pathname, location.hash]);
+
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isMobileMenuOpen]);
+
   const navItems = [
     { label: t.nav.story, href: '/our-story' },
     { label: t.nav.careers, href: '/careers' },
     { label: t.nav.whyFarmers, href: '/#why-farmers' },
     { label: t.nav.initiatives, href: '/#initiatives' },
-    { label: t.nav.farmerRegistration, href: '/farmer-registration#farmer-registration-form' },
+    { 
+      label: t.nav.farmerRegistration, 
+      href: '/farmer-registration#farmer-registration-form',
+      isSpecial: true,
+      badge: 'New'
+    },
     { label: t.nav.volunteer, href: '/volunteer#volunteer-form' },
     { label: t.nav.faq, href: '/faq' },
     { label: t.nav.contact, href: '/contact' },
   ];
 
-  return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      isScrolled || isMobileMenuOpen 
-        ? 'bg-white/95 backdrop-blur-md shadow-lg border-b border-gray-100' 
-        : 'bg-gradient-to-b from-black/85 via-black/40 to-transparent'
-    }`}>
-      <div className="container mx-auto px-4 lg:px-8">
-        <div className="flex items-center justify-between h-20">
-          {/* Logo */}
-          <div className="flex items-center space-x-2">
-            <Link 
-              to="/" 
-              className={`text-xl font-bold transition-colors ${
-                isScrolled ? 'text-gray-900 hover:text-primary-600' : 'text-white hover:text-primary-100'
-              }`}
-            >
-              Ketaki Adhar
-            </Link>
-          </div>
+  const isLightHeader = isScrolled || isMobileMenuOpen;
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-6 lg:space-x-8">
-            {navItems.map((item) => (
-              <Link
-                key={item.href}
-                to={item.href}
-                className={`text-sm font-medium transition-colors ${
-                  isScrolled ? 'text-gray-700 hover:text-primary-600' : 'text-white/90 hover:text-white'
+  return (
+    <>
+      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isLightHeader 
+          ? 'bg-white/95 backdrop-blur-md shadow-md border-b border-gray-100' 
+          : 'bg-gradient-to-b from-black/85 via-black/40 to-transparent'
+      }`}>
+        <div className="container mx-auto px-4 lg:px-8">
+          <div className="flex items-center justify-between h-20">
+            {/* Logo */}
+            <div className="flex items-center space-x-2">
+              <Link 
+                to="/" 
+                className={`text-xl font-bold tracking-tight transition-colors ${
+                  isLightHeader ? 'text-gray-900 hover:text-primary-600' : 'text-white hover:text-primary-100'
                 }`}
               >
-                {item.label}
+                Ketaki Adhar
               </Link>
-            ))}
+            </div>
 
-            {/* Desktop Language Selector */}
-            <LanguageSelector isScrolled={isScrolled} variant="desktop" />
+            {/* Desktop Navigation */}
+            <nav className="hidden md:flex items-center space-x-6 lg:space-x-8">
+              {navItems.map((item) => (
+                <Link
+                  key={item.href}
+                  to={item.href}
+                  className={`text-sm font-medium transition-colors ${
+                    isScrolled ? 'text-gray-700 hover:text-primary-600' : 'text-white/90 hover:text-white'
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              ))}
 
-            {/* Donate CTA */}
-            <Link 
-              to="/donate#pledge-form"
-              className="bg-primary-500 text-white px-5 py-2 rounded-full font-medium hover:bg-primary-600 transition-colors shadow-sm"
-            >
-              {t.nav.donateNow}
-            </Link>
-          </nav>
+              {/* Desktop Language Selector */}
+              <LanguageSelector isScrolled={isScrolled} variant="desktop" />
 
-          {/* Mobile Right Controls: Language Selector + Menu Toggle */}
-          <div className="flex items-center space-x-2 md:hidden">
-            {/* Quick mobile language pill */}
-            <LanguageSelector isScrolled={isScrolled} variant="mobile-header" />
-
-            {/* Mobile menu toggle */}
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              aria-label="Toggle Navigation Menu" aria-expanded={isMobileMenuOpen} aria-controls="mobile-navigation-menu"
-              className={`p-1.5 rounded-lg focus:outline-none transition-colors ${
-                isScrolled || isMobileMenuOpen ? 'text-gray-700 hover:text-primary-500' : 'text-white hover:text-white'
-              }`}
-            >
-              {isMobileMenuOpen ? (
-                <X className="h-6 w-6" />
-              ) : (
-                <Menu className="h-6 w-6" />
-              )}
-            </button>
-          </div>
-        </div>
-
-        {/* Mobile menu drawer */}
-        <div
-          id="mobile-navigation-menu" className={`md:hidden transition-all duration-300 ease-in-out ${
-            isMobileMenuOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0 overflow-hidden pointer-events-none'
-          }`}
-        >
-          {/* Prominent Easy-to-switch Language Grid for Phone Users */}
-          <LanguageSelector variant="mobile-menu" />
-
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 border-t border-gray-100">
-            {navItems.map((item) => (
-              <Link
-                key={item.href}
-                to={item.href}
-                className="block px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 rounded-md"
-                onClick={() => setIsMobileMenuOpen(false)}
+              {/* Donate CTA */}
+              <Link 
+                to="/donate#pledge-form"
+                className="bg-primary-500 text-white px-5 py-2 rounded-full font-medium hover:bg-primary-600 transition-colors shadow-sm"
               >
-                {item.label}
+                {t.nav.donateNow}
               </Link>
-            ))}
-          </div>
-          <div className="px-4 pb-4">
-            <Link 
-              to="/donate#pledge-form" 
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="block w-full text-center bg-primary-500 text-white px-6 py-2.5 rounded-full font-medium hover:bg-primary-600 transition-colors"
-            >
-              {t.nav.donateNow}
-            </Link>
+            </nav>
+
+            {/* Mobile Right Controls: Language Selector + Animated Menu Toggle */}
+            <div className="flex items-center space-x-2 md:hidden">
+              {/* Quick mobile language pill */}
+              <LanguageSelector isScrolled={isLightHeader} variant="mobile-header" />
+
+              {/* Animated Hamburger / Close Button */}
+              <motion.button
+                type="button"
+                whileTap={{ scale: 0.9 }}
+                onClick={() => setIsMobileMenuOpen(prev => !prev)}
+                aria-label={isMobileMenuOpen ? "Close Navigation Menu" : "Open Navigation Menu"}
+                aria-expanded={isMobileMenuOpen}
+                aria-controls="mobile-navigation-menu"
+                className={`w-11 h-11 flex flex-col items-center justify-center rounded-xl transition-all border ${
+                  isLightHeader 
+                    ? 'bg-gray-100 hover:bg-gray-200 border-gray-200 text-gray-800' 
+                    : 'bg-white/15 hover:bg-white/25 border-white/20 text-white backdrop-blur-sm'
+                }`}
+              >
+                <div className="w-5 h-4 relative flex flex-col justify-between">
+                  <motion.span
+                    animate={isMobileMenuOpen ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }}
+                    transition={{ duration: 0.25, ease: 'easeInOut' }}
+                    className={`w-5 h-0.5 rounded-full block origin-center ${
+                      isLightHeader ? 'bg-gray-800' : 'bg-white'
+                    }`}
+                  />
+                  <motion.span
+                    animate={isMobileMenuOpen ? { opacity: 0, scaleX: 0 } : { opacity: 1, scaleX: 1 }}
+                    transition={{ duration: 0.2 }}
+                    className={`w-5 h-0.5 rounded-full block origin-left ${
+                      isLightHeader ? 'bg-gray-800' : 'bg-white'
+                    }`}
+                  />
+                  <motion.span
+                    animate={isMobileMenuOpen ? { rotate: -45, y: -7 } : { rotate: 0, y: 0 }}
+                    transition={{ duration: 0.25, ease: 'easeInOut' }}
+                    className={`w-5 h-0.5 rounded-full block origin-center ${
+                      isLightHeader ? 'bg-gray-800' : 'bg-white'
+                    }`}
+                  />
+                </div>
+              </motion.button>
+            </div>
           </div>
         </div>
-      </div>
-    </header>
+
+        {/* Animated Mobile Menu Drawer */}
+        <AnimatePresence>
+          {isMobileMenuOpen && (
+            <motion.div
+              id="mobile-navigation-menu"
+              key="mobile-drawer"
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              className="md:hidden bg-white/98 backdrop-blur-xl border-b border-gray-200 shadow-2xl max-h-[calc(100dvh-5rem)] overflow-y-auto"
+            >
+              <div className="container mx-auto px-4 py-3 space-y-4">
+                {/* Easy-to-switch Language Grid for Phone Users */}
+                <div className="bg-gray-50/80 rounded-2xl p-2 border border-gray-100">
+                  <LanguageSelector variant="mobile-menu" />
+                </div>
+
+                {/* Staggered Navigation Items */}
+                <div className="space-y-1">
+                  {navItems.map((item, index) => {
+                    const isActive = location.pathname === item.href.split('#')[0];
+                    return (
+                      <motion.div
+                        key={item.href}
+                        initial={{ opacity: 0, x: -14 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.05 + index * 0.03, duration: 0.22 }}
+                      >
+                        <Link
+                          to={item.href}
+                          onClick={() => setIsMobileMenuOpen(false)}
+                          className={`group flex items-center justify-between px-3.5 py-2.5 rounded-xl text-base font-medium transition-all ${
+                            isActive
+                              ? 'bg-primary-50 text-primary-700 font-semibold'
+                              : item.isSpecial
+                              ? 'bg-emerald-50/70 text-emerald-800 hover:bg-emerald-100/70'
+                              : 'text-gray-800 hover:bg-gray-100/80 hover:text-primary-600'
+                          }`}
+                        >
+                          <div className="flex items-center space-x-3">
+                            <span className={`w-2 h-2 rounded-full transition-transform ${
+                              isActive
+                                ? 'bg-primary-600 scale-125'
+                                : item.isSpecial
+                                ? 'bg-emerald-500 scale-110'
+                                : 'bg-gray-300 group-hover:bg-primary-500 group-hover:scale-125'
+                            }`} />
+                            <span>{item.label}</span>
+                            {item.badge && (
+                              <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-600 text-white shadow-xs">
+                                <Sparkles className="w-2.5 h-2.5 mr-0.5" />
+                                {item.badge}
+                              </span>
+                            )}
+                          </div>
+                          <ChevronRight className="w-4 h-4 text-gray-400 group-hover:text-primary-600 group-hover:translate-x-0.5 transition-all" />
+                        </Link>
+                      </motion.div>
+                    );
+                  })}
+                </div>
+
+                {/* Bottom CTA Actions */}
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.32, duration: 0.25 }}
+                  className="pt-2 pb-4"
+                >
+                  <Link 
+                    to="/donate#pledge-form" 
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="w-full flex items-center justify-center space-x-2 bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-700 hover:to-primary-600 text-white py-3.5 px-6 rounded-2xl font-bold shadow-lg shadow-primary-500/25 transition-all active:scale-[0.98]"
+                  >
+                    <Heart className="w-5 h-5 fill-white/20" />
+                    <span>{t.nav.donateNow}</span>
+                  </Link>
+                </motion.div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </header>
+
+      {/* Dimmed backdrop when mobile menu is open */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            key="mobile-backdrop"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            onClick={() => setIsMobileMenuOpen(false)}
+            aria-hidden="true"
+            className="fixed inset-0 top-20 bg-black/50 backdrop-blur-xs z-40 md:hidden"
+          />
+        )}
+      </AnimatePresence>
+    </>
   );
 };
 
