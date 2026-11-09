@@ -20,8 +20,13 @@ export interface FormSubmissionPayload {
   data: Record<string, any>;
 }
 
-// Environment variable configured in .env as VITE_GOOGLE_SHEETS_SCRIPT_URL
-const SCRIPT_URL: string = (import.meta.env.VITE_GOOGLE_SHEETS_SCRIPT_URL as string) || '';
+// Primary Google Sheets Web App Endpoint
+const DEFAULT_SCRIPT_URL =
+  'https://script.google.com/macros/s/AKfycbzgevofXNFnPPCOzNnMVMM6m2iLw_oJZUmdvHNVS9KZ2LhcXezqhGL93KcGhYQ3aB4z/exec';
+
+// Environment variable configured in .env as VITE_GOOGLE_SHEETS_SCRIPT_URL with default fallback
+const SCRIPT_URL: string =
+  (import.meta.env.VITE_GOOGLE_SHEETS_SCRIPT_URL as string) || DEFAULT_SCRIPT_URL;
 
 /**
  * Submits structured form data to the Google Sheets Web App endpoint
@@ -78,3 +83,4 @@ export async function submitToGoogleSheets(
     };
   }
 }
+

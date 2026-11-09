@@ -18,6 +18,12 @@
  * ==============================================================================
  */
 
+function doGet(e) {
+  return ContentService.createTextOutput(
+    JSON.stringify({ status: 'online', service: 'Ketaki Adhar Form Sync', timestamp: new Date().toISOString() })
+  ).setMimeType(ContentService.MimeType.JSON);
+}
+
 function doPost(e) {
   var lock = LockService.getScriptLock();
   lock.tryLock(10000);
@@ -341,3 +347,4 @@ function logGeneral(ss, timestamp, data) {
   var sheet = getOrCreateSheet(ss, '📦 Miscellaneous', headers, '#374151');
   sheet.appendRow([timestamp, data.formType || 'Unknown', JSON.stringify(data)]);
 }
+
