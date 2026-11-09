@@ -1,20 +1,14 @@
 /**
  * ==============================================================================
- * KETAKI ADHAR FOUNDATION - UNIFIED GOOGLE APPS SCRIPT WEB APP
+ * KETAKI ADHAR FOUNDATION - UNIFIED GOOGLE APPS SCRIPT WEB APP (EXECUTIVE EDITION)
  * ==============================================================================
- * This script accepts JSON form submissions from ketakiadhar.in and routes
- * them automatically into separate, professionally formatted tabs inside
- * ONE Google Spreadsheet workbook.
- *
- * TABS CREATED AUTOMATICALLY:
- *  1. "📋 All Submissions" - Master real-time activity log
- *  2. "💚 Donations" - Support pledges & donor details
- *  3. "🤝 Volunteers" - Volunteer applications & availability
- *  4. "🌾 Farmer Registrations" - Detailed farmer registrations & farm profiles
- *  5. "🚜 Farmer Quick Help" - Homepage quick farmer assistance requests
- *  6. "✉️ Contact Inquiries" - General contact & support queries
- *  7. "💼 Job Applications" - Career applications
- *  8. "❓ Questions & FAQ" - Questions submitted via FAQ
+ * Features:
+ *  - ALL details & headers perfectly CENTER-ALIGNED horizontally & vertically
+ *  - Generous, tailored column widths (no squashed/truncated text or messy overflow)
+ *  - Automatic text wrapping on long messages, remarks & addresses
+ *  - Elegant header styling (42px height, bold white text, themed brand colors)
+ *  - Subtle alternating row backgrounds (zebra striping) & crisp grid borders
+ *  - Includes "formatAndBeautifyAllSheets()" function to clean up existing data in 1 click!
  * ==============================================================================
  */
 
@@ -88,26 +82,65 @@ function doPost(e) {
 }
 
 // ------------------------------------------------------------------------------
-// Helper: Get or Create Sheet with Formatted Headers
+// Helper: Get or Create Sheet with Formatted Headers & Tailored Column Widths
 // ------------------------------------------------------------------------------
-function getOrCreateSheet(ss, sheetName, headers, headerColor) {
+function getOrCreateSheet(ss, sheetName, headers, headerColor, columnWidths) {
   var sheet = ss.getSheetByName(sheetName);
+  var isNew = false;
   if (!sheet) {
     sheet = ss.insertSheet(sheetName);
-    var headerRow = sheet.getRange(1, 1, 1, headers.length);
-    headerRow.setValues([headers]);
-    headerRow.setFontWeight('bold');
-    headerRow.setFontColor('#FFFFFF');
-    headerRow.setBackground(headerColor || '#059669');
-    headerRow.setHorizontalAlignment('center');
-    sheet.setFrozenRows(1);
+    isNew = true;
+  }
 
-    // Auto-adjust column widths
-    for (var i = 1; i <= headers.length; i++) {
-      sheet.setColumnWidth(i, 160);
+  // Format header row
+  var headerRow = sheet.getRange(1, 1, 1, headers.length);
+  headerRow.setValues([headers]);
+  headerRow.setFontWeight('bold');
+  headerRow.setFontSize(10.5);
+  headerRow.setFontFamily('Arial');
+  headerRow.setFontColor('#FFFFFF');
+  headerRow.setBackground(headerColor || '#059669');
+  headerRow.setHorizontalAlignment('center');
+  headerRow.setVerticalAlignment('middle');
+  headerRow.setWrapStrategy(SpreadsheetApp.WrapStrategy.WRAP);
+  sheet.setRowHeight(1, 42);
+  sheet.setFrozenRows(1);
+
+  // Apply generous custom column widths
+  if (columnWidths && columnWidths.length > 0) {
+    for (var i = 0; i < columnWidths.length; i++) {
+      sheet.setColumnWidth(i + 1, columnWidths[i]);
     }
   }
+
   return sheet;
+}
+
+// ------------------------------------------------------------------------------
+// Helper: Append Perfectly Centered, Padded & Styled Data Row
+// ------------------------------------------------------------------------------
+function appendFormattedRow(sheet, rowValues) {
+  sheet.appendRow(rowValues);
+  var lastRow = sheet.getLastRow();
+  var range = sheet.getRange(lastRow, 1, 1, rowValues.length);
+
+  // Center alignment & clean typography
+  range.setHorizontalAlignment('center');
+  range.setVerticalAlignment('middle');
+  range.setFontFamily('Arial');
+  range.setFontSize(10);
+  range.setWrapStrategy(SpreadsheetApp.WrapStrategy.WRAP);
+
+  // Subtle zebra striping for high readability
+  if (lastRow % 2 === 0) {
+    range.setBackground('#F9FAFB'); // very light subtle gray
+  } else {
+    range.setBackground('#FFFFFF');
+  }
+
+  // Crisp, clean gridlines
+  range.setBorder(true, true, true, true, true, true, '#E5E7EB', SpreadsheetApp.BorderStyle.SOLID);
+  sheet.setRowHeight(lastRow, 36);
 }
 
 // ------------------------------------------------------------------------------
@@ -123,7 +156,9 @@ function logToMaster(ss, timestamp, data) {
     'Location / City',
     'Summary / Reference Code'
   ];
-  var sheet = getOrCreateSheet(ss, '📋 All Submissions', headers, '#064E3B');
+  // Column widths: Timestamp, Type, Name, Phone, Email, Location, Summary
+  var widths = [180, 200, 200, 160, 240, 200, 260];
+  var sheet = getOrCreateSheet(ss, '📋 All Submissions', headers, '#064E3B', widths);
 
   var name = data.fullName || data.name || '-';
   var phone = data.phone || '-';
@@ -131,7 +166,7 @@ function logToMaster(ss, timestamp, data) {
   var location = data.city || data.district || data.village || '-';
   var summary = data.pledgeCode || data.enrollmentCode || data.subject || data.supportPillar || data.roleInterest || data.inquiryType || '-';
 
-  sheet.appendRow([
+  appendFormattedRow(sheet, [
     timestamp,
     data.formTitle || data.formType,
     name,
@@ -157,9 +192,11 @@ function logDonation(ss, timestamp, data) {
     'Pledge Frequency',
     'Message / Notes'
   ];
-  var sheet = getOrCreateSheet(ss, '💚 Donations', headers, '#10B981');
+  // Generous widths so pledge code & notes have ample space
+  var widths = [180, 180, 200, 240, 160, 160, 260, 180, 320];
+  var sheet = getOrCreateSheet(ss, '💚 Donations', headers, '#10B981', widths);
 
-  sheet.appendRow([
+  appendFormattedRow(sheet, [
     timestamp,
     data.pledgeCode || '-',
     data.fullName || '-',
@@ -187,9 +224,10 @@ function logVolunteer(ss, timestamp, data) {
     'Previous Experience / Skills',
     'Motivation'
   ];
-  var sheet = getOrCreateSheet(ss, '🤝 Volunteers', headers, '#2563EB');
+  var widths = [180, 200, 240, 160, 160, 240, 200, 280, 320];
+  var sheet = getOrCreateSheet(ss, '🤝 Volunteers', headers, '#2563EB', widths);
 
-  sheet.appendRow([
+  appendFormattedRow(sheet, [
     timestamp,
     data.fullName || '-',
     data.email || '-',
@@ -221,9 +259,10 @@ function logFarmerRegistration(ss, timestamp, data) {
     'Support Required',
     'Additional Remarks'
   ];
-  var sheet = getOrCreateSheet(ss, '🌾 Farmer Registrations', headers, '#15803D');
+  var widths = [180, 190, 200, 160, 140, 160, 160, 160, 220, 160, 200, 250, 300];
+  var sheet = getOrCreateSheet(ss, '🌾 Farmer Registrations', headers, '#15803D', widths);
 
-  sheet.appendRow([
+  appendFormattedRow(sheet, [
     timestamp,
     data.enrollmentCode || '-',
     data.fullName || '-',
@@ -254,9 +293,10 @@ function logFarmerQuick(ss, timestamp, data) {
     'Village',
     'Reported Problem / Assistance Needed'
   ];
-  var sheet = getOrCreateSheet(ss, '🚜 Farmer Quick Help', headers, '#D97706');
+  var widths = [180, 200, 160, 140, 160, 160, 160, 340];
+  var sheet = getOrCreateSheet(ss, '🚜 Farmer Quick Help', headers, '#D97706', widths);
 
-  sheet.appendRow([
+  appendFormattedRow(sheet, [
     timestamp,
     data.fullName || '-',
     data.phone || '-',
@@ -281,9 +321,10 @@ function logContact(ss, timestamp, data) {
     'Subject',
     'Message'
   ];
-  var sheet = getOrCreateSheet(ss, '✉️ Contact Inquiries', headers, '#7C3AED');
+  var widths = [180, 200, 240, 160, 180, 240, 360];
+  var sheet = getOrCreateSheet(ss, '✉️ Contact Inquiries', headers, '#7C3AED', widths);
 
-  sheet.appendRow([
+  appendFormattedRow(sheet, [
     timestamp,
     data.fullName || '-',
     data.email || '-',
@@ -308,9 +349,10 @@ function logCareer(ss, timestamp, data) {
     'Current City',
     'Portfolio / LinkedIn / Cover Note'
   ];
-  var sheet = getOrCreateSheet(ss, '💼 Job Applications', headers, '#0D9488');
+  var widths = [180, 200, 240, 160, 200, 160, 180, 320];
+  var sheet = getOrCreateSheet(ss, '💼 Job Applications', headers, '#0D9488', widths);
 
-  sheet.appendRow([
+  appendFormattedRow(sheet, [
     timestamp,
     data.fullName || '-',
     data.email || '-',
@@ -332,9 +374,10 @@ function logFAQ(ss, timestamp, data) {
     'Email',
     'Question'
   ];
-  var sheet = getOrCreateSheet(ss, '❓ Questions & FAQ', headers, '#4B5563');
+  var widths = [180, 200, 240, 350];
+  var sheet = getOrCreateSheet(ss, '❓ Questions & FAQ', headers, '#4B5563', widths);
 
-  sheet.appendRow([
+  appendFormattedRow(sheet, [
     timestamp,
     data.fullName || '-',
     data.email || '-',
@@ -344,7 +387,86 @@ function logFAQ(ss, timestamp, data) {
 
 function logGeneral(ss, timestamp, data) {
   var headers = ['Timestamp', 'Form Type', 'Payload JSON'];
-  var sheet = getOrCreateSheet(ss, '📦 Miscellaneous', headers, '#374151');
-  sheet.appendRow([timestamp, data.formType || 'Unknown', JSON.stringify(data)]);
+  var widths = [180, 200, 500];
+  var sheet = getOrCreateSheet(ss, '📦 Miscellaneous', headers, '#374151', widths);
+  appendFormattedRow(sheet, [timestamp, data.formType || 'Unknown', JSON.stringify(data)]);
 }
 
+// ------------------------------------------------------------------------------
+// ONE-CLICK CLEANUP FUNCTION: Reformat & Beautify All Existing Sheets & Rows
+// ------------------------------------------------------------------------------
+/**
+ * Run this function once from the Google Apps Script editor to instantly
+ * clean up, widen columns, center-align, and format ALL existing sheets and rows!
+ */
+function formatAndBeautifyAllSheets() {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheets = ss.getSheets();
+
+  var widthMap = {
+    '📋 All Submissions': [180, 200, 200, 160, 240, 200, 260],
+    '💚 Donations': [180, 180, 200, 240, 160, 160, 260, 180, 320],
+    '🤝 Volunteers': [180, 200, 240, 160, 160, 240, 200, 280, 320],
+    '🌾 Farmer Registrations': [180, 190, 200, 160, 140, 160, 160, 160, 220, 160, 200, 250, 300],
+    '🚜 Farmer Quick Help': [180, 200, 160, 140, 160, 160, 160, 340],
+    '✉️ Contact Inquiries': [180, 200, 240, 160, 180, 240, 360],
+    '💼 Job Applications': [180, 200, 240, 160, 200, 160, 180, 320],
+    '❓ Questions & FAQ': [180, 200, 240, 350]
+  };
+
+  for (var s = 0; s < sheets.length; s++) {
+    var sheet = sheets[s];
+    var name = sheet.getName();
+    var lastRow = sheet.getLastRow();
+    var lastCol = sheet.getLastColumn();
+
+    if (lastRow === 0 || lastCol === 0) continue;
+
+    // 1. Header styling
+    var headerRange = sheet.getRange(1, 1, 1, lastCol);
+    headerRange.setFontWeight('bold');
+    headerRange.setFontSize(10.5);
+    headerRange.setFontFamily('Arial');
+    headerRange.setFontColor('#FFFFFF');
+    headerRange.setHorizontalAlignment('center');
+    headerRange.setVerticalAlignment('middle');
+    headerRange.setWrapStrategy(SpreadsheetApp.WrapStrategy.WRAP);
+    sheet.setRowHeight(1, 42);
+    sheet.setFrozenRows(1);
+
+    // 2. Data rows styling
+    if (lastRow > 1) {
+      var dataRange = sheet.getRange(2, 1, lastRow - 1, lastCol);
+      dataRange.setHorizontalAlignment('center');
+      dataRange.setVerticalAlignment('middle');
+      dataRange.setFontFamily('Arial');
+      dataRange.setFontSize(10);
+      dataRange.setWrapStrategy(SpreadsheetApp.WrapStrategy.WRAP);
+      dataRange.setBorder(true, true, true, true, true, true, '#E5E7EB', SpreadsheetApp.BorderStyle.SOLID);
+
+      for (var r = 2; r <= lastRow; r++) {
+        sheet.setRowHeight(r, 36);
+        var rowRange = sheet.getRange(r, 1, 1, lastCol);
+        if (r % 2 === 0) {
+          rowRange.setBackground('#F9FAFB');
+        } else {
+          rowRange.setBackground('#FFFFFF');
+        }
+      }
+    }
+
+    // 3. Apply custom generous column widths
+    var customWidths = widthMap[name];
+    if (customWidths) {
+      for (var c = 0; c < customWidths.length && c < lastCol; c++) {
+        sheet.setColumnWidth(c + 1, customWidths[c]);
+      }
+    } else {
+      for (var col = 1; col <= lastCol; col++) {
+        sheet.setColumnWidth(col, 200);
+      }
+    }
+  }
+
+  Logger.log('All sheets have been beautifully centered, formatted, and widened!');
+}
