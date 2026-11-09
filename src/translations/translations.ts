@@ -30,7 +30,7 @@ export const translations = {
     hero: {
       line1: 'How does',
       brand: 'Ketaki Adhar',
-      line2: 'Helps Farmers',
+      line2: 'Help Farmers',
       line3: 'Grow and Thrive',
       scroll: 'Farmer Information Form',
     },

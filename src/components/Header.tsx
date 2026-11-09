@@ -66,7 +66,51 @@ const Header = () => {
           : 'bg-gradient-to-b from-black/85 via-black/40 to-transparent'
       }`}>
         <div className="container mx-auto px-4 lg:px-8">
-          <div className="flex items-center justify-between h-20">
+          {/* Desktop Navigation Row (Perfect 3-Column Centered Layout) */}
+          <div className="hidden md:grid md:grid-cols-[1fr_auto_1fr] items-center h-20">
+            {/* Left: Brand Logo */}
+            <div className="flex items-center justify-start">
+              <Link 
+                to="/" 
+                className={`text-xl font-bold tracking-tight transition-colors ${
+                  isLightHeader ? 'text-gray-900 hover:text-primary-600' : 'text-white hover:text-primary-100'
+                }`}
+              >
+                Ketaki Adhar
+              </Link>
+            </div>
+
+            {/* Center: Perfectly Centered Navigation Links */}
+            <nav className="flex items-center justify-center space-x-6 lg:space-x-8">
+              {navItems.map((item) => (
+                <Link
+                  key={item.href}
+                  to={item.href}
+                  className={`text-sm font-medium transition-colors whitespace-nowrap ${
+                    isScrolled 
+                      ? 'text-gray-700 hover:text-primary-600' 
+                      : 'text-white/90 hover:text-white'
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </nav>
+
+            {/* Right: Actions (Language Selector + Donate CTA) */}
+            <div className="flex items-center justify-end space-x-3.5 lg:space-x-4">
+              <LanguageSelector isScrolled={isScrolled} variant="desktop" />
+              <Link 
+                to="/donate#pledge-form"
+                className="bg-primary-500 text-white px-5 py-2 rounded-full font-medium hover:bg-primary-600 transition-colors shadow-sm whitespace-nowrap"
+              >
+                {t.nav.donateNow}
+              </Link>
+            </div>
+          </div>
+
+          {/* Mobile Header Row */}
+          <div className="flex items-center justify-between h-20 md:hidden">
             {/* Logo */}
             <div className="flex items-center space-x-2">
               <Link 
@@ -79,34 +123,8 @@ const Header = () => {
               </Link>
             </div>
 
-            {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center space-x-6 lg:space-x-8">
-              {navItems.map((item) => (
-                <Link
-                  key={item.href}
-                  to={item.href}
-                  className={`text-sm font-medium transition-colors ${
-                    isScrolled ? 'text-gray-700 hover:text-primary-600' : 'text-white/90 hover:text-white'
-                  }`}
-                >
-                  {item.label}
-                </Link>
-              ))}
-
-              {/* Desktop Language Selector */}
-              <LanguageSelector isScrolled={isScrolled} variant="desktop" />
-
-              {/* Donate CTA */}
-              <Link 
-                to="/donate#pledge-form"
-                className="bg-primary-500 text-white px-5 py-2 rounded-full font-medium hover:bg-primary-600 transition-colors shadow-sm"
-              >
-                {t.nav.donateNow}
-              </Link>
-            </nav>
-
             {/* Mobile Right Controls: Language Selector + Animated Menu Toggle */}
-            <div className="flex items-center space-x-2 md:hidden">
+            <div className="flex items-center space-x-2">
               {/* Quick mobile language pill */}
               <LanguageSelector isScrolled={isLightHeader} variant="mobile-header" />
 
