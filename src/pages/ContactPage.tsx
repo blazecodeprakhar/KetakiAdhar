@@ -7,14 +7,26 @@ const ContactUs = () => {
   const { t } = useLanguage();
   const c = t.contactPage;
   const { showToast } = useToast();
-  const [copied, setCopied] = useState(false);
+  const [copiedEmail, setCopiedEmail] = useState(false);
+  const [copiedPhone, setCopiedPhone] = useState(false);
 
   const handleCopyEmail = () => {
     try {
       navigator.clipboard.writeText('info@ketakiadhar.in');
-      setCopied(true);
+      setCopiedEmail(true);
       showToast('Email address info@ketakiadhar.in copied to clipboard!', 'info');
-      setTimeout(() => setCopied(false), 2500);
+      setTimeout(() => setCopiedEmail(false), 2500);
+    } catch (e) {
+      // fallback
+    }
+  };
+
+  const handleCopyPhone = () => {
+    try {
+      navigator.clipboard.writeText('8062177240');
+      setCopiedPhone(true);
+      showToast('Phone number 8062177240 copied to clipboard!', 'info');
+      setTimeout(() => setCopiedPhone(false), 2500);
     } catch (e) {
       // fallback
     }
@@ -36,14 +48,25 @@ const ContactUs = () => {
       title: c.officeTitle,
       details: [c.officeAddress],
       color: "from-primary-500 to-primary-600",
-      isEmail: false
+      isEmail: false,
+      isPhone: false,
+    },
+    {
+      icon: Phone,
+      title: c.phoneTitle,
+      details: [c.phoneNumber, c.phoneHours],
+      color: "from-emerald-500 to-teal-600",
+      isEmail: false,
+      isPhone: true,
+      phoneHref: "tel:8062177240",
     },
     {
       icon: Mail,
       title: c.emailTitle,
       details: ["info@ketakiadhar.in", c.emailResponse],
       color: "from-accent-500 to-accent-600",
-      isEmail: true
+      isEmail: true,
+      isPhone: false,
     }
   ];
 
@@ -106,31 +129,61 @@ const ContactUs = () => {
       {/* Contact Info Cards */}
       <section className="py-20 bg-gradient-to-br from-primary-50 to-secondary-50">
         <div className="container mx-auto px-4 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {contactInfo.map((info, index) => {
               const Icon = info.icon;
               return (
-                <div key={index} className="bg-white rounded-3xl p-8 shadow-lg hover:shadow-xl transition-all transform hover:scale-105">
-                  <div className={`w-16 h-16 bg-gradient-to-r ${info.color} rounded-full flex items-center justify-center mb-6`}>
-                    <Icon className="w-8 h-8 text-white" />
-                  </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-4">{info.title}</h3>
-                  <div className="space-y-2">
-                    {info.details.map((detail, idx) => (
-                      <p key={idx} className="text-gray-600 flex items-center flex-wrap">
-                        <span>{detail}</span>
-                        {info.isEmail && idx === 0 && (
-                          <button
-                            type="button"
-                            onClick={handleCopyEmail}
-                            className="ml-2 text-xs bg-primary-100 hover:bg-primary-200 text-primary-800 px-2 py-0.5 rounded-md font-medium transition-colors cursor-pointer"
-                            title="Copy email address"
-                          >
-                            {copied ? 'Copied!' : 'Copy'}
-                          </button>
-                        )}
-                      </p>
-                    ))}
+                <div key={index} className="bg-white rounded-3xl p-8 shadow-lg hover:shadow-xl transition-all transform hover:scale-105 flex flex-col justify-between">
+                  <div>
+                    <div className={`w-16 h-16 bg-gradient-to-r ${info.color} rounded-full flex items-center justify-center mb-6`}>
+                      <Icon className="w-8 h-8 text-white" />
+                    </div>
+                    <h3 className="text-xl font-bold text-gray-900 mb-4">{info.title}</h3>
+                    <div className="space-y-2">
+                      {info.details.map((detail, idx) => (
+                        <p key={idx} className="text-gray-600 flex items-center flex-wrap">
+                          {info.isPhone && idx === 0 ? (
+                            <a 
+                              href={info.phoneHref}
+                              className="font-semibold text-gray-900 hover:text-primary-600 transition-colors"
+                            >
+                              {detail}
+                            </a>
+                          ) : info.isEmail && idx === 0 ? (
+                            <a 
+                              href="mailto:info@ketakiadhar.in"
+                              className="font-semibold text-gray-900 hover:text-primary-600 transition-colors"
+                            >
+                              {detail}
+                            </a>
+                          ) : (
+                            <span>{detail}</span>
+                          )}
+
+                          {info.isPhone && idx === 0 && (
+                            <button
+                              type="button"
+                              onClick={handleCopyPhone}
+                              className="ml-2 text-xs bg-primary-100 hover:bg-primary-200 text-primary-800 px-2 py-0.5 rounded-md font-medium transition-colors cursor-pointer"
+                              title="Copy phone number"
+                            >
+                              {copiedPhone ? 'Copied!' : 'Copy'}
+                            </button>
+                          )}
+
+                          {info.isEmail && idx === 0 && (
+                            <button
+                              type="button"
+                              onClick={handleCopyEmail}
+                              className="ml-2 text-xs bg-primary-100 hover:bg-primary-200 text-primary-800 px-2 py-0.5 rounded-md font-medium transition-colors cursor-pointer"
+                              title="Copy email address"
+                            >
+                              {copiedEmail ? 'Copied!' : 'Copy'}
+                            </button>
+                          )}
+                        </p>
+                      ))}
+                    </div>
                   </div>
                 </div>
               );

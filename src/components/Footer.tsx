@@ -1,5 +1,5 @@
 import React from 'react';
-import { Mail, MapPin, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
+import { Mail, MapPin, Phone, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 
@@ -104,17 +104,27 @@ const Footer = () => {
               <div className="flex items-start space-x-3">
                 <MapPin className="w-5 h-5 text-primary-400 mt-1 flex-shrink-0" />
                 <div>
-                  <p className="text-gray-400 leading-relaxed">
+                  <p className="text-gray-400 leading-relaxed text-sm">
                     {f.address}
                   </p>
                 </div>
               </div>
 
               <div className="flex items-center space-x-3">
+                <Phone className="w-5 h-5 text-primary-400 flex-shrink-0" />
+                <a 
+                  href="tel:8062177240" 
+                  className="text-gray-400 hover:text-primary-400 transition-colors font-medium text-sm"
+                >
+                  {f.phone || '+91 80621 77240'}
+                </a>
+              </div>
+
+              <div className="flex items-center space-x-3">
                 <Mail className="w-5 h-5 text-primary-400 flex-shrink-0" />
                 <a 
                   href="mailto:info@ketakiadhar.in" 
-                  className="text-gray-400 hover:text-primary-400 transition-colors"
+                  className="text-gray-400 hover:text-primary-400 transition-colors text-sm"
                 >
                   info@ketakiadhar.in
                 </a>
