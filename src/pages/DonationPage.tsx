@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLocation } from 'react-router-dom';
+import { submitToGoogleSheets } from '../services/googleSheets';
 import { 
   Heart, 
   ShieldCheck, 
@@ -109,17 +110,29 @@ const DonationPage = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    setTimeout(() => {
-      const code = 'KA-PLEDGE-' + Math.floor(100000 + Math.random() * 900000);
-      setPledgeCode(code);
-      setIsSubmitting(false);
-      setIsSubmitted(true);
-      showToast('Support pledge successfully registered! Thank you for standing with our farmers.', 'success');
-    }, 700);
+    const code = 'KA-PLEDGE-' + Math.floor(100000 + Math.random() * 900000);
+    setPledgeCode(code);
+
+    try {
+      await submitToGoogleSheets({
+        formType: 'donation',
+        formTitle: 'Donation & Support Pledge',
+        data: {
+          ...formData,
+          pledgeCode: code,
+        },
+      });
+    } catch (err) {
+      console.error('Google Sheets sync error:', err);
+    }
+
+    setIsSubmitting(false);
+    setIsSubmitted(true);
+    showToast('Support pledge successfully registered! Thank you for standing with our farmers.', 'success');
   };
 
   // Live completion tracking

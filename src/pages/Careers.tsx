@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Upload, Send, Users, Heart, Target, Award, CheckCircle } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
+import { submitToGoogleSheets } from '../services/googleSheets';
 
 const Careers = () => {
   const { t } = useLanguage();
@@ -60,10 +61,26 @@ const Careers = () => {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Application submitted:', formData);
     setIsSubmitted(true);
+
+    try {
+      await submitToGoogleSheets({
+        formType: 'career',
+        formTitle: 'Careers Job Application',
+        data: {
+          fullName: formData.fullName,
+          email: formData.email,
+          phone: formData.phone,
+          message: formData.message,
+          hasResume: Boolean(formData.resume),
+          resumeName: formData.resume ? formData.resume.name : null,
+        },
+      });
+    } catch (err) {
+      console.error('Google Sheets sync error:', err);
+    }
 
     setTimeout(() => {
       setIsSubmitted(false);

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Mail, Phone, MapPin, Send, MessageCircle } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { useToast } from '../context/ToastContext';
+import { submitToGoogleSheets } from '../services/googleSheets';
 
 const ContactUs = () => {
   const { t } = useLanguage();
@@ -79,11 +80,21 @@ const ContactUs = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Contact form submitted:', formData);
     setIsSubmitted(true);
-      showToast('Message sent! Our support desk will reach out within 24 hours.', 'success');
+
+    try {
+      await submitToGoogleSheets({
+        formType: 'contact',
+        formTitle: 'Contact Page Inquiry',
+        data: formData,
+      });
+    } catch (err) {
+      console.error('Google Sheets sync error:', err);
+    }
+
+    showToast('Message sent! Our support desk will reach out within 24 hours.', 'success');
     setFormData({
       fullName: '',
       email: '',

@@ -2,6 +2,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import React, { useState } from 'react';
 import { ChevronDown, ChevronUp, HelpCircle, Send } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
+import { submitToGoogleSheets } from '../services/googleSheets';
 
 const FAQ = () => {
   const { t } = useLanguage();
@@ -22,10 +23,20 @@ const FAQ = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('FAQ Question submitted:', formData);
     setIsSubmitted(true);
+
+    try {
+      await submitToGoogleSheets({
+        formType: 'faq',
+        formTitle: 'FAQ Question Submission',
+        data: formData,
+      });
+    } catch (err) {
+      console.error('Google Sheets sync error:', err);
+    }
+
     setFormData({ fullName: '', email: '', question: '' });
     setTimeout(() => setIsSubmitted(false), 4000);
   };

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLocation } from 'react-router-dom';
+import { submitToGoogleSheets } from '../services/googleSheets';
 import { 
   Users, 
   Heart, 
@@ -91,17 +92,24 @@ const VolunteerPage = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    setTimeout(() => {
-      console.log('Volunteer registration submitted:', formData);
-      setIsSubmitting(false);
-      setIsSubmitted(true);
-      showToast('Volunteer registration received! Our team will contact you shortly.', 'success');
-      setFormData(initialFormData);
-    }, 700);
+    try {
+      await submitToGoogleSheets({
+        formType: 'volunteer',
+        formTitle: 'Volunteer Application',
+        data: formData,
+      });
+    } catch (err) {
+      console.error('Google Sheets sync error:', err);
+    }
+
+    setIsSubmitting(false);
+    setIsSubmitted(true);
+    showToast('Volunteer registration received! Our team will contact you shortly.', 'success');
+    setFormData(initialFormData);
   };
 
   // Live completion tracking

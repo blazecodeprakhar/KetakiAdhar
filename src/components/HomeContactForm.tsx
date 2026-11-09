@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { Send, CheckCircle, User, Phone, MapPin, Upload, X, FileText, Image as ImageIcon, Sprout } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { useToast } from '../context/ToastContext';
+import { submitToGoogleSheets } from '../services/googleSheets';
 
 interface FarmerFormData {
   fullName: string;
@@ -66,31 +67,45 @@ const HomeContactForm = () => {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    setTimeout(() => {
-      console.log('Farmer Information submitted:', {
-        ...formData,
-        photoName: formData.photo ? formData.photo.name : null
+    try {
+      await submitToGoogleSheets({
+        formType: 'farmer_quick',
+        formTitle: 'Homepage Farmer Quick Assistance',
+        data: {
+          fullName: formData.fullName,
+          phone: formData.phone,
+          acres: formData.acres,
+          district: formData.district,
+          taluka: formData.taluka,
+          village: formData.village,
+          remarkProblem: formData.remarkProblem,
+          hasPhoto: Boolean(formData.photo),
+          photoName: formData.photo ? formData.photo.name : null,
+        },
       });
-      setIsSubmitting(false);
-      setIsSubmitted(true);
-      showToast('Farmer assistance request submitted successfully!', 'success');
+    } catch (err) {
+      console.error('Google Sheets sync error:', err);
+    }
 
-      setTimeout(() => {
-        setIsSubmitted(false);
-        setFormData(initialFormData);
-        if (photoPreview) {
-          URL.revokeObjectURL(photoPreview);
-          setPhotoPreview(null);
-        }
-        if (fileInputRef.current) {
-          fileInputRef.current.value = '';
-        }
-      }, 4000);
-    }, 600);
+    setIsSubmitting(false);
+    setIsSubmitted(true);
+    showToast('Farmer assistance request submitted successfully!', 'success');
+
+    setTimeout(() => {
+      setIsSubmitted(false);
+      setFormData(initialFormData);
+      if (photoPreview) {
+        URL.revokeObjectURL(photoPreview);
+        setPhotoPreview(null);
+      }
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
+    }, 4000);
   };
 
   if (isSubmitted) {
