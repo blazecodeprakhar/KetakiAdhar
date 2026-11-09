@@ -23,7 +23,7 @@ export const translations = {
       farmerRegistration: 'Farmer Registration',
       volunteer: 'Be a Volunteer',
       faq: 'FAQ',
-      contact: 'Contact Us',
+      contact: 'Contact',
       donateNow: 'Donate Now',
       selectLanguage: 'Language',
     },
